@@ -1,0 +1,5 @@
+markazi(){
+	chalo (1 se 15){
+		likho("hello world :-)");
+	}
+}
