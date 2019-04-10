@@ -17,13 +17,13 @@ hindsa return hindsa;
 chindsa return chindsa;
 bhindsa return bhindsa;
 jumla return jumla;
-harf return harf;
+booliyayi return booliyayi;
 aasharia return aasharia;
 khaali return  khaali;
 sahih return sahih;
 ghalat return ghalat;
 \"(\\.|[^"\\])*\" return stringliteral;
-^[a-zA-Z][_a-zA-Z0-9]* return identifier;
+[a-zA-Z][_a-zA-Z0-9]* return identifier;
 ([0-9]+\.[0-9]+) return decimal;
 ([1-9][0-9]*) return integer;
 "=" return EA;
@@ -51,9 +51,10 @@ ghalat return ghalat;
 ")" return RRP;
 "{" return LCP;
 "}" return RCP;
+"," return comma;
 ";" return semicolon;
 [ \t\n]+ ;
-. return yytext[0];
+
 %%
 
 int yywrap(void){

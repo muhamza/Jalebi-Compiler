@@ -9,7 +9,7 @@
 #define chindsa 9
 #define bhindsa 10
 #define jumla 11
-#define harf 12
+#define booliyayi 12
 #define aasharia 13
 #define khaali 14
 #define sahih 15
@@ -44,5 +44,6 @@
 #define RRP 44
 #define LCP 45
 #define RCP 46
-#define semicolon 47
+#define comma 47
+#define semicolon 48
 

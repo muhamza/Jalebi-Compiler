@@ -1,5 +1,9 @@
 markazi(){
-	chalo (1 se 15){
-		likho("hello world :-)");
+	booliyayi test = sahih;
+	agar (test == sahih){
+		likho("sahih");		
+	}
+	warna{
+		likho("ghalat");	
 	}
 }
