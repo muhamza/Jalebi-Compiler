@@ -15,6 +15,7 @@ void UpdateSymbolValue(char symbol, int value);
 %token decimal integer
 %token comma semicolon	
 
+%start start
 %left LRP RRP LCP RCP
 %right INO DCO
 %left MUL DIV MOD PLS MIS
@@ -23,52 +24,68 @@ void UpdateSymbolValue(char symbol, int value);
 %right EA AA SA MA DA 
 
 %%
-start: markazi LRP RRP <compound-statement>
-<compound-statement>: LCP <multi-declaration>  <multi-statement> RCP
-<multi-declaration>: <declaration> <multi-declaration> | <declaration>
-<multi-statement>: <statement> <multi-statement> | <statement>
-<declaration>: <number-type> identifier semicolon 
-	| <string-type> identifier semicolon 
-	| <float-type> identifier semicolon 
-	| <number-type> identifier EA integer semicolon 
-	| <string-type> identifier EA stringliteral semicolon 
-	| <float-type> identifier EA decimal semicolon 
-	| <bool-type> identifier EA <bool-options> semicolon 
-<statement>: <expression-statement>
-	| <selection-statement>
-	| <iteration-statement>
-	| <print-statement>
-<statement>: <expression-statement>
-	| <selection-statement>
-	| <iteration-statement>
-	| <print-statement>
-<print-statement>: likho <LRP> stringliteral <RRP> 
-	| likho <LRP> stringliteral comma identifier <RRP> 
-<selection-statement>: <if-statement> <else-if-statement> <else-statement>
-<if-statement>: agar LRP <logical-expression> RRP <compound-statement>
-<else-if-statement>: agarwarna LRP <logical-expression> RRP <compound-statement> 
-	| ε
-<else-statement>: warna <compund-statement> 
-	| ε
-<iteration-statement>: jabtak LRP <logical-expression> RRP <compound-statement>
-                        | chalo LRP integer se integer RRP <compound-statement>
-<logical-expression>: LRP <relational-expression> RRP <logical-operators>  LRP <relational 	expression> RRP
- 	| NOT LRP <relational-expression> RRP 
-	| <relational-expression>
-<relational-expression>: identifier <relational-operator> integer
-	| integer <relational-operator> integer
-	| <bool-options>
-<expression-statement>: identifier <assignment-operator> identifier semicolon
-	| identifier <assignment-operator> <numbers> semicolon
-	| identifier <inc-dec-operator> semicolon
-	| <inc-dec-operator> identifier semicolon
-	| identifier <assignment-operator><add-expression> semicolon
-<add-expression>: <add-expression> PLS <multiply-expression> 
-	| <add-expression> MIS <multiply-expression> 
-	| <multiply-expression> semicolon
-<multiply-expression>: <multiply-expression> MUL <terminal-expression> 
-	| <multiply-expression> DIV <terminal-expression> 
-	| <terminal-expression> semicolon
-<terminal-expression>: <numbers> 
+start: markazi LRP RRP COMPOUNDSTATEMENT
+ASSIGNMENTOPERATORS: EA | MA | DA | AA | SA
+RELATIONALOPERATORS: GT | LT | GTE | LTE | IEQ | NEQ
+LOGICALOPERATORS: AND | OR
+NOTOPERATOR: NOT
+INCDECOPERATORS: INO | DCO
+BOOLTYPE: booliyayi
+BOOLOPTIONS: sahih | ghalat
+FLOATTYPE: aasharia
+NUMBERTYPE: hindsa | chindsa | bhindsa
+STRINGTYPE: jumla
+NUMBERS: integer | decimal
+COMPOUNDSTATEMENT: LCP MULTIDECLARATION  MULTISTATEMENT RCP
+MULTIDECLARATION: DECLARATION MULTIDECLARATION | DECLARATION
+MULTISTATEMENT: STATEMENT MULTISTATEMENT | STATEMENT
+DECLARATION: NUMBERTYPE identifier semicolon 
+	| STRINGTYPE identifier semicolon 
+	| FLOATTYPE identifier semicolon 
+	| NUMBERTYPE identifier EA integer semicolon 
+	| STRINGTYPE identifier EA stringliteral semicolon 
+	| FLOATTYPE identifier EA decimal semicolon 
+	| BOOLTYPE identifier EA BOOLOPTIONS semicolon 
+STATEMENT: EXPRESSIONSTATEMENT
+	| SELECTIONSTATEMENT
+	| ITERATIONSTATEMENT
+	| PRINTSTATEMENT
+PRINTSTATEMENT: likho LRP stringliteral RRP 
+	| likho LRP stringliteral comma identifier RRP 
+SELECTIONSTATEMENT: IFSTATEMENT ELSEIFSTATEMENT ELSESTATEMENT
+IFSTATEMENT: agar LRP LOGICALEXPRESSION RRP COMPOUNDSTATEMENT
+ELSEIFSTATEMENT: agarwarna LRP LOGICALEXPRESSION RRP COMPOUNDSTATEMENT 
+	| 
+ELSESTATEMENT: warna COMPOUNDSTATEMENT 
+	| 
+ITERATIONSTATEMENT: jabtak LRP LOGICALEXPRESSION RRP COMPOUNDSTATEMENT
+        | chalo LRP integer se integer RRP COMPOUNDSTATEMENT
+LOGICALEXPRESSION: LRP RELATIONALEXPRESSION RRP LOGICALOPERATORS LRP RELATIONALEXPRESSION RRP
+ 	| NOTOPERATOR LRP RELATIONALEXPRESSION RRP 
+	| RELATIONALEXPRESSION
+RELATIONALEXPRESSION: identifier RELATIONALOPERATORS integer
+	| integer RELATIONALOPERATORS integer
+	| BOOLOPTIONS
+EXPRESSIONSTATEMENT: identifier ASSIGNMENTOPERATORS identifier semicolon
+	| identifier ASSIGNMENTOPERATORS NUMBERS semicolon
+	| identifier INCDECOPERATORS semicolon
+	| INCDECOPERATORS identifier semicolon
+	| identifier ASSIGNMENTOPERATORS ADDEXPRESSION semicolon
+ADDEXPRESSION: ADDEXPRESSION PLS MULTIPLYEXPRESSION 
+	| ADDEXPRESSION MIS MULTIPLYEXPRESSION 
+	| MULTIPLYEXPRESSION semicolon
+MULTIPLYEXPRESSION: MULTIPLYEXPRESSION MUL TERMINALEXPRESSION 
+	| MULTIPLYEXPRESSION DIV TERMINALEXPRESSION 
+	| TERMINALEXPRESSION semicolon
+TERMINALEXPRESSION: NUMBERS 
 	| identifier 
-	| LRP <add-expression> RRP semicolon
+	| LRP ADDEXPRESSION RRP semicolon
+%%
+
+int main(void){
+	return yyparse();
+}
+
+void yyerror (char *s) {
+	fprintf(stderr, "%s\n",s); 
+}
