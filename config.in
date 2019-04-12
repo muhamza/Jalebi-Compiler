@@ -1,9 +1,9 @@
 markazi(){
 	booliyayi test = sahih;
-	hindsa a = 5;
-	agar (test == sahih){
+	hindsa number = 5;
+	agar (number == 5){
 		likho("sahih");	
-		a++;	
+		number++;	
 	}
 	warna{
 		likho("ghalat");	
