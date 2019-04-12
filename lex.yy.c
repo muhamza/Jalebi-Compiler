@@ -556,10 +556,9 @@ int yy_flex_debug = 0;
 char *yytext;
 #line 1 "tokenizer.l"
 #line 2 "tokenizer.l"
-#include "tokenizer.h"
-
+#include "y.tab.h"
+#line 561 "lex.yy.c"
 #line 562 "lex.yy.c"
-#line 563 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -776,7 +775,7 @@ YY_DECL
 	{
 #line 7 "tokenizer.l"
 
-#line 780 "lex.yy.c"
+#line 779 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -1095,7 +1094,7 @@ YY_RULE_SETUP
 #line 58 "tokenizer.l"
 ECHO;
 	YY_BREAK
-#line 1099 "lex.yy.c"
+#line 1098 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 

@@ -1,8 +1,7 @@
 %{
-#include "tokenizer.h"
 #include "y.tab.h"
-
 %}
+
 %option nounput yylineno
 
 %%

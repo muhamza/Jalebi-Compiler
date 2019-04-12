@@ -1,10 +1,9 @@
 %{
+int yylex();
 void yyerror (char *s);
 #include <stdio.h>
 #include <stdlib.h>
-int symboltable[50];
-int GetSymbolValue(char symbol);
-void UpdateSymbolValue(char symbol, int value);
+#include <ctype.h>
 %}
 
 %token markazi se chalo jabtak
@@ -15,7 +14,7 @@ void UpdateSymbolValue(char symbol, int value);
 %token decimal integer
 %token comma semicolon	
 
-%start start
+%start START
 %left LRP RRP LCP RCP
 %right INO DCO
 %left MUL DIV MOD PLS MIS
@@ -24,11 +23,14 @@ void UpdateSymbolValue(char symbol, int value);
 %right EA AA SA MA DA 
 
 %%
-start: markazi LRP RRP COMPOUNDSTATEMENT
-ASSIGNMENTOPERATORS: EA | MA | DA | AA | SA
+START: markazi LRP RRP COMPOUNDSTATEMENT
+/* assignment operators like +=, -=, *=, /= */
+ASSIGNMENTOPERATORS: MA | DA | AA | SA
+/* relational operators like >, <, >=, <=, ==, != */
 RELATIONALOPERATORS: GT | LT | GTE | LTE | IEQ | NEQ
 LOGICALOPERATORS: AND | OR
 NOTOPERATOR: NOT
+/* increment and decrement operators like ++,-- */
 INCDECOPERATORS: INO | DCO
 BOOLTYPE: booliyayi
 BOOLOPTIONS: sahih | ghalat
@@ -36,9 +38,11 @@ FLOATTYPE: aasharia
 NUMBERTYPE: hindsa | chindsa | bhindsa
 STRINGTYPE: jumla
 NUMBERS: integer | decimal
-COMPOUNDSTATEMENT: LCP MULTIDECLARATION  MULTISTATEMENT RCP
-MULTIDECLARATION: DECLARATION MULTIDECLARATION | DECLARATION
-MULTISTATEMENT: STATEMENT MULTISTATEMENT | STATEMENT
+COMPOUNDSTATEMENT: LCP MULTIDECLARATION  MULTISTATEMENT RCP 
+MULTIDECLARATION: DECLARATION MULTIDECLARATION 
+	| 
+MULTISTATEMENT: STATEMENT MULTISTATEMENT 
+	| 
 DECLARATION: NUMBERTYPE identifier semicolon 
 	| STRINGTYPE identifier semicolon 
 	| FLOATTYPE identifier semicolon 
@@ -50,8 +54,8 @@ STATEMENT: EXPRESSIONSTATEMENT
 	| SELECTIONSTATEMENT
 	| ITERATIONSTATEMENT
 	| PRINTSTATEMENT
-PRINTSTATEMENT: likho LRP stringliteral RRP 
-	| likho LRP stringliteral comma identifier RRP 
+PRINTSTATEMENT: likho LRP stringliteral RRP semicolon
+	| likho LRP stringliteral comma identifier RRP semicolon
 SELECTIONSTATEMENT: IFSTATEMENT ELSEIFSTATEMENT ELSESTATEMENT
 IFSTATEMENT: agar LRP LOGICALEXPRESSION RRP COMPOUNDSTATEMENT
 ELSEIFSTATEMENT: agarwarna LRP LOGICALEXPRESSION RRP COMPOUNDSTATEMENT 
@@ -66,20 +70,24 @@ LOGICALEXPRESSION: LRP RELATIONALEXPRESSION RRP LOGICALOPERATORS LRP RELATIONALE
 RELATIONALEXPRESSION: identifier RELATIONALOPERATORS integer
 	| integer RELATIONALOPERATORS integer
 	| BOOLOPTIONS
+/* Note: 	
+	1) the first two rules of EXPRESSIONSTATEMENT will cater all assignment operators except for =;
+	2) the last rule will cater assignment (=) 
+*/
 EXPRESSIONSTATEMENT: identifier ASSIGNMENTOPERATORS identifier semicolon
 	| identifier ASSIGNMENTOPERATORS NUMBERS semicolon
 	| identifier INCDECOPERATORS semicolon
 	| INCDECOPERATORS identifier semicolon
-	| identifier ASSIGNMENTOPERATORS ADDEXPRESSION semicolon
+	| identifier EA ADDEXPRESSION semicolon
 ADDEXPRESSION: ADDEXPRESSION PLS MULTIPLYEXPRESSION 
 	| ADDEXPRESSION MIS MULTIPLYEXPRESSION 
-	| MULTIPLYEXPRESSION semicolon
+	| MULTIPLYEXPRESSION
 MULTIPLYEXPRESSION: MULTIPLYEXPRESSION MUL TERMINALEXPRESSION 
 	| MULTIPLYEXPRESSION DIV TERMINALEXPRESSION 
-	| TERMINALEXPRESSION semicolon
+	| TERMINALEXPRESSION
 TERMINALEXPRESSION: NUMBERS 
 	| identifier 
-	| LRP ADDEXPRESSION RRP semicolon
+	| LRP ADDEXPRESSION RRP
 %%
 
 int main(void){
