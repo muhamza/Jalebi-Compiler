@@ -54,45 +54,43 @@ extern int yydebug;
     warna = 264,
     likho = 265,
     hindsa = 266,
-    chindsa = 267,
-    bhindsa = 268,
-    jumla = 269,
-    booliyayi = 270,
-    aasharia = 271,
-    khaali = 272,
-    sahih = 273,
-    ghalat = 274,
-    stringliteral = 275,
-    identifier = 276,
-    decimal = 277,
-    integer = 278,
-    comma = 279,
-    semicolon = 280,
-    LRP = 281,
-    RRP = 282,
-    LCP = 283,
-    RCP = 284,
-    INO = 285,
-    DCO = 286,
-    MUL = 287,
-    DIV = 288,
-    MOD = 289,
-    PLS = 290,
-    MIS = 291,
-    LT = 292,
-    LTE = 293,
-    GT = 294,
-    GTE = 295,
-    IEQ = 296,
-    NEQ = 297,
-    NOT = 298,
-    AND = 299,
-    OR = 300,
-    EA = 301,
-    AA = 302,
-    SA = 303,
-    MA = 304,
-    DA = 305
+    jumla = 267,
+    booliyayi = 268,
+    aasharia = 269,
+    khaali = 270,
+    sahih = 271,
+    ghalat = 272,
+    stringliteral = 273,
+    identifier = 274,
+    decimal = 275,
+    integer = 276,
+    comma = 277,
+    semicolon = 278,
+    LRP = 279,
+    RRP = 280,
+    LCP = 281,
+    RCP = 282,
+    INO = 283,
+    DCO = 284,
+    MUL = 285,
+    DIV = 286,
+    MOD = 287,
+    PLS = 288,
+    MIS = 289,
+    LT = 290,
+    LTE = 291,
+    GT = 292,
+    GTE = 293,
+    IEQ = 294,
+    NEQ = 295,
+    NOT = 296,
+    AND = 297,
+    OR = 298,
+    EA = 299,
+    AA = 300,
+    SA = 301,
+    MA = 302,
+    DA = 303
   };
 #endif
 /* Tokens.  */
@@ -105,45 +103,43 @@ extern int yydebug;
 #define warna 264
 #define likho 265
 #define hindsa 266
-#define chindsa 267
-#define bhindsa 268
-#define jumla 269
-#define booliyayi 270
-#define aasharia 271
-#define khaali 272
-#define sahih 273
-#define ghalat 274
-#define stringliteral 275
-#define identifier 276
-#define decimal 277
-#define integer 278
-#define comma 279
-#define semicolon 280
-#define LRP 281
-#define RRP 282
-#define LCP 283
-#define RCP 284
-#define INO 285
-#define DCO 286
-#define MUL 287
-#define DIV 288
-#define MOD 289
-#define PLS 290
-#define MIS 291
-#define LT 292
-#define LTE 293
-#define GT 294
-#define GTE 295
-#define IEQ 296
-#define NEQ 297
-#define NOT 298
-#define AND 299
-#define OR 300
-#define EA 301
-#define AA 302
-#define SA 303
-#define MA 304
-#define DA 305
+#define jumla 267
+#define booliyayi 268
+#define aasharia 269
+#define khaali 270
+#define sahih 271
+#define ghalat 272
+#define stringliteral 273
+#define identifier 274
+#define decimal 275
+#define integer 276
+#define comma 277
+#define semicolon 278
+#define LRP 279
+#define RRP 280
+#define LCP 281
+#define RCP 282
+#define INO 283
+#define DCO 284
+#define MUL 285
+#define DIV 286
+#define MOD 287
+#define PLS 288
+#define MIS 289
+#define LT 290
+#define LTE 291
+#define GT 292
+#define GTE 293
+#define IEQ 294
+#define NEQ 295
+#define NOT 296
+#define AND 297
+#define OR 298
+#define EA 299
+#define AA 300
+#define SA 301
+#define MA 302
+#define DA 303
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED

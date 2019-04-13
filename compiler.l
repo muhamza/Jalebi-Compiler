@@ -14,8 +14,6 @@ warna return warna;
 agarwarna  return agarwarna;
 likho return likho;
 hindsa return hindsa;
-chindsa return chindsa;
-bhindsa return bhindsa;
 jumla return jumla;
 booliyayi return booliyayi;
 aasharia return aasharia;

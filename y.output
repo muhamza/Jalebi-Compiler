@@ -38,76 +38,75 @@ Grammar
    20 FLOATTYPE: aasharia
 
    21 NUMBERTYPE: hindsa
-   22           | chindsa
-   23           | bhindsa
 
-   24 STRINGTYPE: jumla
+   22 STRINGTYPE: jumla
 
-   25 NUMBERS: integer
-   26        | decimal
+   23 NUMBERS: integer
+   24        | decimal
 
-   27 COMPOUNDSTATEMENT: LCP MULTIDECLARATION MULTISTATEMENT RCP
+   25 COMPOUNDSTATEMENT: LCP MULTIDECLARATION MULTISTATEMENT RCP
 
-   28 MULTIDECLARATION: DECLARATION MULTIDECLARATION
-   29                 | %empty
+   26 MULTIDECLARATION: DECLARATION MULTIDECLARATION
+   27                 | %empty
 
-   30 MULTISTATEMENT: STATEMENT MULTISTATEMENT
-   31               | %empty
+   28 MULTISTATEMENT: STATEMENT MULTISTATEMENT
+   29               | %empty
 
-   32 DECLARATION: NUMBERTYPE identifier semicolon
-   33            | STRINGTYPE identifier semicolon
-   34            | FLOATTYPE identifier semicolon
-   35            | NUMBERTYPE identifier EA integer semicolon
-   36            | STRINGTYPE identifier EA stringliteral semicolon
-   37            | FLOATTYPE identifier EA decimal semicolon
-   38            | BOOLTYPE identifier EA BOOLOPTIONS semicolon
+   30 DECLARATION: NUMBERTYPE identifier semicolon
+   31            | STRINGTYPE identifier semicolon
+   32            | FLOATTYPE identifier semicolon
+   33            | NUMBERTYPE identifier EA integer semicolon
+   34            | STRINGTYPE identifier EA stringliteral semicolon
+   35            | FLOATTYPE identifier EA decimal semicolon
+   36            | BOOLTYPE identifier EA BOOLOPTIONS semicolon
 
-   39 STATEMENT: EXPRESSIONSTATEMENT
-   40          | SELECTIONSTATEMENT
-   41          | ITERATIONSTATEMENT
-   42          | PRINTSTATEMENT
+   37 STATEMENT: EXPRESSIONSTATEMENT
+   38          | SELECTIONSTATEMENT
+   39          | ITERATIONSTATEMENT
+   40          | PRINTSTATEMENT
 
-   43 PRINTSTATEMENT: likho LRP stringliteral RRP semicolon
-   44               | likho LRP stringliteral comma identifier RRP semicolon
+   41 PRINTSTATEMENT: likho LRP stringliteral RRP semicolon
+   42               | likho LRP stringliteral comma identifier RRP semicolon
+   43               | likho LRP identifier RRP semicolon
 
-   45 SELECTIONSTATEMENT: IFSTATEMENT ELSEIFSTATEMENT ELSESTATEMENT
+   44 SELECTIONSTATEMENT: IFSTATEMENT ELSEIFSTATEMENT ELSESTATEMENT
 
-   46 IFSTATEMENT: agar LRP LOGICALEXPRESSION RRP COMPOUNDSTATEMENT
+   45 IFSTATEMENT: agar LRP LOGICALEXPRESSION RRP COMPOUNDSTATEMENT
 
-   47 ELSEIFSTATEMENT: agarwarna LRP LOGICALEXPRESSION RRP COMPOUNDSTATEMENT
-   48                | %empty
+   46 ELSEIFSTATEMENT: agarwarna LRP LOGICALEXPRESSION RRP COMPOUNDSTATEMENT
+   47                | %empty
 
-   49 ELSESTATEMENT: warna COMPOUNDSTATEMENT
-   50              | %empty
+   48 ELSESTATEMENT: warna COMPOUNDSTATEMENT
+   49              | %empty
 
-   51 ITERATIONSTATEMENT: jabtak LRP LOGICALEXPRESSION RRP COMPOUNDSTATEMENT
-   52                   | chalo LRP integer se integer RRP COMPOUNDSTATEMENT
+   50 ITERATIONSTATEMENT: jabtak LRP LOGICALEXPRESSION RRP COMPOUNDSTATEMENT
+   51                   | chalo LRP integer se integer RRP COMPOUNDSTATEMENT
 
-   53 LOGICALEXPRESSION: LRP RELATIONALEXPRESSION RRP LOGICALOPERATORS LRP RELATIONALEXPRESSION RRP
-   54                  | NOTOPERATOR LRP RELATIONALEXPRESSION RRP
-   55                  | RELATIONALEXPRESSION
+   52 LOGICALEXPRESSION: LRP RELATIONALEXPRESSION RRP LOGICALOPERATORS LRP RELATIONALEXPRESSION RRP
+   53                  | NOTOPERATOR LRP RELATIONALEXPRESSION RRP
+   54                  | RELATIONALEXPRESSION
 
-   56 RELATIONALEXPRESSION: identifier RELATIONALOPERATORS integer
-   57                     | integer RELATIONALOPERATORS integer
-   58                     | BOOLOPTIONS
+   55 RELATIONALEXPRESSION: identifier RELATIONALOPERATORS integer
+   56                     | integer RELATIONALOPERATORS integer
+   57                     | BOOLOPTIONS
 
-   59 EXPRESSIONSTATEMENT: identifier ASSIGNMENTOPERATORS identifier semicolon
-   60                    | identifier ASSIGNMENTOPERATORS NUMBERS semicolon
-   61                    | identifier INCDECOPERATORS semicolon
-   62                    | INCDECOPERATORS identifier semicolon
-   63                    | identifier EA ADDEXPRESSION semicolon
+   58 EXPRESSIONSTATEMENT: identifier ASSIGNMENTOPERATORS identifier semicolon
+   59                    | identifier ASSIGNMENTOPERATORS NUMBERS semicolon
+   60                    | identifier INCDECOPERATORS semicolon
+   61                    | INCDECOPERATORS identifier semicolon
+   62                    | identifier EA ADDEXPRESSION semicolon
 
-   64 ADDEXPRESSION: ADDEXPRESSION PLS MULTIPLYEXPRESSION
-   65              | ADDEXPRESSION MIS MULTIPLYEXPRESSION
-   66              | MULTIPLYEXPRESSION
+   63 ADDEXPRESSION: ADDEXPRESSION PLS MULTIPLYEXPRESSION
+   64              | ADDEXPRESSION MIS MULTIPLYEXPRESSION
+   65              | MULTIPLYEXPRESSION
 
-   67 MULTIPLYEXPRESSION: MULTIPLYEXPRESSION MUL TERMINALEXPRESSION
-   68                   | MULTIPLYEXPRESSION DIV TERMINALEXPRESSION
-   69                   | TERMINALEXPRESSION
+   66 MULTIPLYEXPRESSION: MULTIPLYEXPRESSION MUL TERMINALEXPRESSION
+   67                   | MULTIPLYEXPRESSION DIV TERMINALEXPRESSION
+   68                   | TERMINALEXPRESSION
 
-   70 TERMINALEXPRESSION: NUMBERS
-   71                   | identifier
-   72                   | LRP ADDEXPRESSION RRP
+   69 TERMINALEXPRESSION: NUMBERS
+   70                   | identifier
+   71                   | LRP ADDEXPRESSION RRP
 
 
 Terminals, with rules where they appear
@@ -115,117 +114,115 @@ Terminals, with rules where they appear
 $end (0) 0
 error (256)
 markazi (258) 1
-se (259) 52
-chalo (260) 52
-jabtak (261) 51
-agar (262) 46
-agarwarna (263) 47
-warna (264) 49
-likho (265) 43 44
+se (259) 51
+chalo (260) 51
+jabtak (261) 50
+agar (262) 45
+agarwarna (263) 46
+warna (264) 48
+likho (265) 41 42 43
 hindsa (266) 21
-chindsa (267) 22
-bhindsa (268) 23
-jumla (269) 24
-booliyayi (270) 17
-aasharia (271) 20
-khaali (272)
-sahih (273) 18
-ghalat (274) 19
-stringliteral (275) 36 43 44
-identifier (276) 32 33 34 35 36 37 38 44 56 59 60 61 62 63 71
-decimal (277) 26 37
-integer (278) 25 35 52 56 57
-comma (279) 44
-semicolon (280) 32 33 34 35 36 37 38 43 44 59 60 61 62 63
-LRP (281) 1 43 44 46 47 51 52 53 54 72
-RRP (282) 1 43 44 46 47 51 52 53 54 72
-LCP (283) 27
-RCP (284) 27
-INO (285) 15
-DCO (286) 16
-MUL (287) 67
-DIV (288) 68
-MOD (289)
-PLS (290) 64
-MIS (291) 65
-LT (292) 7
-LTE (293) 9
-GT (294) 6
-GTE (295) 8
-IEQ (296) 10
-NEQ (297) 11
-NOT (298) 14
-AND (299) 12
-OR (300) 13
-EA (301) 35 36 37 38 63
-AA (302) 4
-SA (303) 5
-MA (304) 2
-DA (305) 3
+jumla (267) 22
+booliyayi (268) 17
+aasharia (269) 20
+khaali (270)
+sahih (271) 18
+ghalat (272) 19
+stringliteral (273) 34 41 42
+identifier (274) 30 31 32 33 34 35 36 42 43 55 58 59 60 61 62 70
+decimal (275) 24 35
+integer (276) 23 33 51 55 56
+comma (277) 42
+semicolon (278) 30 31 32 33 34 35 36 41 42 43 58 59 60 61 62
+LRP (279) 1 41 42 43 45 46 50 51 52 53 71
+RRP (280) 1 41 42 43 45 46 50 51 52 53 71
+LCP (281) 25
+RCP (282) 25
+INO (283) 15
+DCO (284) 16
+MUL (285) 66
+DIV (286) 67
+MOD (287)
+PLS (288) 63
+MIS (289) 64
+LT (290) 7
+LTE (291) 9
+GT (292) 6
+GTE (293) 8
+IEQ (294) 10
+NEQ (295) 11
+NOT (296) 14
+AND (297) 12
+OR (298) 13
+EA (299) 33 34 35 36 62
+AA (300) 4
+SA (301) 5
+MA (302) 2
+DA (303) 3
 
 
 Nonterminals, with rules where they appear
 
-$accept (51)
+$accept (49)
     on left: 0
-START (52)
+START (50)
     on left: 1, on right: 0
-ASSIGNMENTOPERATORS (53)
-    on left: 2 3 4 5, on right: 59 60
-RELATIONALOPERATORS (54)
-    on left: 6 7 8 9 10 11, on right: 56 57
-LOGICALOPERATORS (55)
-    on left: 12 13, on right: 53
-NOTOPERATOR (56)
-    on left: 14, on right: 54
-INCDECOPERATORS (57)
-    on left: 15 16, on right: 61 62
-BOOLTYPE (58)
-    on left: 17, on right: 38
-BOOLOPTIONS (59)
-    on left: 18 19, on right: 38 58
-FLOATTYPE (60)
-    on left: 20, on right: 34 37
-NUMBERTYPE (61)
-    on left: 21 22 23, on right: 32 35
-STRINGTYPE (62)
-    on left: 24, on right: 33 36
-NUMBERS (63)
-    on left: 25 26, on right: 60 70
-COMPOUNDSTATEMENT (64)
-    on left: 27, on right: 1 46 47 49 51 52
-MULTIDECLARATION (65)
-    on left: 28 29, on right: 27 28
-MULTISTATEMENT (66)
-    on left: 30 31, on right: 27 30
-DECLARATION (67)
-    on left: 32 33 34 35 36 37 38, on right: 28
-STATEMENT (68)
-    on left: 39 40 41 42, on right: 30
-PRINTSTATEMENT (69)
-    on left: 43 44, on right: 42
-SELECTIONSTATEMENT (70)
-    on left: 45, on right: 40
-IFSTATEMENT (71)
-    on left: 46, on right: 45
-ELSEIFSTATEMENT (72)
-    on left: 47 48, on right: 45
-ELSESTATEMENT (73)
-    on left: 49 50, on right: 45
-ITERATIONSTATEMENT (74)
-    on left: 51 52, on right: 41
-LOGICALEXPRESSION (75)
-    on left: 53 54 55, on right: 46 47 51
-RELATIONALEXPRESSION (76)
-    on left: 56 57 58, on right: 53 54 55
-EXPRESSIONSTATEMENT (77)
-    on left: 59 60 61 62 63, on right: 39
-ADDEXPRESSION (78)
-    on left: 64 65 66, on right: 63 64 65 72
-MULTIPLYEXPRESSION (79)
-    on left: 67 68 69, on right: 64 65 66 67 68
-TERMINALEXPRESSION (80)
-    on left: 70 71 72, on right: 67 68 69
+ASSIGNMENTOPERATORS (51)
+    on left: 2 3 4 5, on right: 58 59
+RELATIONALOPERATORS (52)
+    on left: 6 7 8 9 10 11, on right: 55 56
+LOGICALOPERATORS (53)
+    on left: 12 13, on right: 52
+NOTOPERATOR (54)
+    on left: 14, on right: 53
+INCDECOPERATORS (55)
+    on left: 15 16, on right: 60 61
+BOOLTYPE (56)
+    on left: 17, on right: 36
+BOOLOPTIONS (57)
+    on left: 18 19, on right: 36 57
+FLOATTYPE (58)
+    on left: 20, on right: 32 35
+NUMBERTYPE (59)
+    on left: 21, on right: 30 33
+STRINGTYPE (60)
+    on left: 22, on right: 31 34
+NUMBERS (61)
+    on left: 23 24, on right: 59 69
+COMPOUNDSTATEMENT (62)
+    on left: 25, on right: 1 45 46 48 50 51
+MULTIDECLARATION (63)
+    on left: 26 27, on right: 25 26
+MULTISTATEMENT (64)
+    on left: 28 29, on right: 25 28
+DECLARATION (65)
+    on left: 30 31 32 33 34 35 36, on right: 26
+STATEMENT (66)
+    on left: 37 38 39 40, on right: 28
+PRINTSTATEMENT (67)
+    on left: 41 42 43, on right: 40
+SELECTIONSTATEMENT (68)
+    on left: 44, on right: 38
+IFSTATEMENT (69)
+    on left: 45, on right: 44
+ELSEIFSTATEMENT (70)
+    on left: 46 47, on right: 44
+ELSESTATEMENT (71)
+    on left: 48 49, on right: 44
+ITERATIONSTATEMENT (72)
+    on left: 50 51, on right: 39
+LOGICALEXPRESSION (73)
+    on left: 52 53 54, on right: 45 46 50
+RELATIONALEXPRESSION (74)
+    on left: 55 56 57, on right: 52 53 54
+EXPRESSIONSTATEMENT (75)
+    on left: 58 59 60 61 62, on right: 37
+ADDEXPRESSION (76)
+    on left: 63 64 65, on right: 62 63 64 71
+MULTIPLYEXPRESSION (77)
+    on left: 66 67 68, on right: 63 64 65 66 67
+TERMINALEXPRESSION (78)
+    on left: 69 70 71, on right: 66 67 68
 
 
 State 0
@@ -276,23 +273,21 @@ State 5
 
 State 6
 
-   27 COMPOUNDSTATEMENT: LCP . MULTIDECLARATION MULTISTATEMENT RCP
+   25 COMPOUNDSTATEMENT: LCP . MULTIDECLARATION MULTISTATEMENT RCP
 
     hindsa     shift, and go to state 8
-    chindsa    shift, and go to state 9
-    bhindsa    shift, and go to state 10
-    jumla      shift, and go to state 11
-    booliyayi  shift, and go to state 12
-    aasharia   shift, and go to state 13
+    jumla      shift, and go to state 9
+    booliyayi  shift, and go to state 10
+    aasharia   shift, and go to state 11
 
-    $default  reduce using rule 29 (MULTIDECLARATION)
+    $default  reduce using rule 27 (MULTIDECLARATION)
 
-    BOOLTYPE          go to state 14
-    FLOATTYPE         go to state 15
-    NUMBERTYPE        go to state 16
-    STRINGTYPE        go to state 17
-    MULTIDECLARATION  go to state 18
-    DECLARATION       go to state 19
+    BOOLTYPE          go to state 12
+    FLOATTYPE         go to state 13
+    NUMBERTYPE        go to state 14
+    STRINGTYPE        go to state 15
+    MULTIDECLARATION  go to state 16
+    DECLARATION       go to state 17
 
 
 State 7
@@ -311,1105 +306,691 @@ State 8
 
 State 9
 
-   22 NUMBERTYPE: chindsa .
+   22 STRINGTYPE: jumla .
 
-    $default  reduce using rule 22 (NUMBERTYPE)
+    $default  reduce using rule 22 (STRINGTYPE)
 
 
 State 10
-
-   23 NUMBERTYPE: bhindsa .
-
-    $default  reduce using rule 23 (NUMBERTYPE)
-
-
-State 11
-
-   24 STRINGTYPE: jumla .
-
-    $default  reduce using rule 24 (STRINGTYPE)
-
-
-State 12
 
    17 BOOLTYPE: booliyayi .
 
     $default  reduce using rule 17 (BOOLTYPE)
 
 
-State 13
+State 11
 
    20 FLOATTYPE: aasharia .
 
     $default  reduce using rule 20 (FLOATTYPE)
 
 
+State 12
+
+   36 DECLARATION: BOOLTYPE . identifier EA BOOLOPTIONS semicolon
+
+    identifier  shift, and go to state 18
+
+
+State 13
+
+   32 DECLARATION: FLOATTYPE . identifier semicolon
+   35            | FLOATTYPE . identifier EA decimal semicolon
+
+    identifier  shift, and go to state 19
+
+
 State 14
 
-   38 DECLARATION: BOOLTYPE . identifier EA BOOLOPTIONS semicolon
+   30 DECLARATION: NUMBERTYPE . identifier semicolon
+   33            | NUMBERTYPE . identifier EA integer semicolon
 
     identifier  shift, and go to state 20
 
 
 State 15
 
-   34 DECLARATION: FLOATTYPE . identifier semicolon
-   37            | FLOATTYPE . identifier EA decimal semicolon
+   31 DECLARATION: STRINGTYPE . identifier semicolon
+   34            | STRINGTYPE . identifier EA stringliteral semicolon
 
     identifier  shift, and go to state 21
 
 
 State 16
 
-   32 DECLARATION: NUMBERTYPE . identifier semicolon
-   35            | NUMBERTYPE . identifier EA integer semicolon
+   25 COMPOUNDSTATEMENT: LCP MULTIDECLARATION . MULTISTATEMENT RCP
 
-    identifier  shift, and go to state 22
+    chalo       shift, and go to state 22
+    jabtak      shift, and go to state 23
+    agar        shift, and go to state 24
+    likho       shift, and go to state 25
+    identifier  shift, and go to state 26
+    INO         shift, and go to state 27
+    DCO         shift, and go to state 28
+
+    $default  reduce using rule 29 (MULTISTATEMENT)
+
+    INCDECOPERATORS      go to state 29
+    MULTISTATEMENT       go to state 30
+    STATEMENT            go to state 31
+    PRINTSTATEMENT       go to state 32
+    SELECTIONSTATEMENT   go to state 33
+    IFSTATEMENT          go to state 34
+    ITERATIONSTATEMENT   go to state 35
+    EXPRESSIONSTATEMENT  go to state 36
 
 
 State 17
 
-   33 DECLARATION: STRINGTYPE . identifier semicolon
-   36            | STRINGTYPE . identifier EA stringliteral semicolon
+   26 MULTIDECLARATION: DECLARATION . MULTIDECLARATION
 
-    identifier  shift, and go to state 23
+    hindsa     shift, and go to state 8
+    jumla      shift, and go to state 9
+    booliyayi  shift, and go to state 10
+    aasharia   shift, and go to state 11
+
+    $default  reduce using rule 27 (MULTIDECLARATION)
+
+    BOOLTYPE          go to state 12
+    FLOATTYPE         go to state 13
+    NUMBERTYPE        go to state 14
+    STRINGTYPE        go to state 15
+    MULTIDECLARATION  go to state 37
+    DECLARATION       go to state 17
 
 
 State 18
 
-   27 COMPOUNDSTATEMENT: LCP MULTIDECLARATION . MULTISTATEMENT RCP
+   36 DECLARATION: BOOLTYPE identifier . EA BOOLOPTIONS semicolon
 
-    chalo       shift, and go to state 24
-    jabtak      shift, and go to state 25
-    agar        shift, and go to state 26
-    likho       shift, and go to state 27
-    identifier  shift, and go to state 28
-    INO         shift, and go to state 29
-    DCO         shift, and go to state 30
-
-    $default  reduce using rule 31 (MULTISTATEMENT)
-
-    INCDECOPERATORS      go to state 31
-    MULTISTATEMENT       go to state 32
-    STATEMENT            go to state 33
-    PRINTSTATEMENT       go to state 34
-    SELECTIONSTATEMENT   go to state 35
-    IFSTATEMENT          go to state 36
-    ITERATIONSTATEMENT   go to state 37
-    EXPRESSIONSTATEMENT  go to state 38
+    EA  shift, and go to state 38
 
 
 State 19
 
-   28 MULTIDECLARATION: DECLARATION . MULTIDECLARATION
+   32 DECLARATION: FLOATTYPE identifier . semicolon
+   35            | FLOATTYPE identifier . EA decimal semicolon
 
-    hindsa     shift, and go to state 8
-    chindsa    shift, and go to state 9
-    bhindsa    shift, and go to state 10
-    jumla      shift, and go to state 11
-    booliyayi  shift, and go to state 12
-    aasharia   shift, and go to state 13
-
-    $default  reduce using rule 29 (MULTIDECLARATION)
-
-    BOOLTYPE          go to state 14
-    FLOATTYPE         go to state 15
-    NUMBERTYPE        go to state 16
-    STRINGTYPE        go to state 17
-    MULTIDECLARATION  go to state 39
-    DECLARATION       go to state 19
+    semicolon  shift, and go to state 39
+    EA         shift, and go to state 40
 
 
 State 20
 
-   38 DECLARATION: BOOLTYPE identifier . EA BOOLOPTIONS semicolon
-
-    EA  shift, and go to state 40
-
-
-State 21
-
-   34 DECLARATION: FLOATTYPE identifier . semicolon
-   37            | FLOATTYPE identifier . EA decimal semicolon
+   30 DECLARATION: NUMBERTYPE identifier . semicolon
+   33            | NUMBERTYPE identifier . EA integer semicolon
 
     semicolon  shift, and go to state 41
     EA         shift, and go to state 42
 
 
-State 22
+State 21
 
-   32 DECLARATION: NUMBERTYPE identifier . semicolon
-   35            | NUMBERTYPE identifier . EA integer semicolon
+   31 DECLARATION: STRINGTYPE identifier . semicolon
+   34            | STRINGTYPE identifier . EA stringliteral semicolon
 
     semicolon  shift, and go to state 43
     EA         shift, and go to state 44
 
 
+State 22
+
+   51 ITERATIONSTATEMENT: chalo . LRP integer se integer RRP COMPOUNDSTATEMENT
+
+    LRP  shift, and go to state 45
+
+
 State 23
 
-   33 DECLARATION: STRINGTYPE identifier . semicolon
-   36            | STRINGTYPE identifier . EA stringliteral semicolon
+   50 ITERATIONSTATEMENT: jabtak . LRP LOGICALEXPRESSION RRP COMPOUNDSTATEMENT
 
-    semicolon  shift, and go to state 45
-    EA         shift, and go to state 46
+    LRP  shift, and go to state 46
 
 
 State 24
 
-   52 ITERATIONSTATEMENT: chalo . LRP integer se integer RRP COMPOUNDSTATEMENT
+   45 IFSTATEMENT: agar . LRP LOGICALEXPRESSION RRP COMPOUNDSTATEMENT
 
     LRP  shift, and go to state 47
 
 
 State 25
 
-   51 ITERATIONSTATEMENT: jabtak . LRP LOGICALEXPRESSION RRP COMPOUNDSTATEMENT
+   41 PRINTSTATEMENT: likho . LRP stringliteral RRP semicolon
+   42               | likho . LRP stringliteral comma identifier RRP semicolon
+   43               | likho . LRP identifier RRP semicolon
 
     LRP  shift, and go to state 48
 
 
 State 26
 
-   46 IFSTATEMENT: agar . LRP LOGICALEXPRESSION RRP COMPOUNDSTATEMENT
+   58 EXPRESSIONSTATEMENT: identifier . ASSIGNMENTOPERATORS identifier semicolon
+   59                    | identifier . ASSIGNMENTOPERATORS NUMBERS semicolon
+   60                    | identifier . INCDECOPERATORS semicolon
+   62                    | identifier . EA ADDEXPRESSION semicolon
 
-    LRP  shift, and go to state 49
+    INO  shift, and go to state 27
+    DCO  shift, and go to state 28
+    EA   shift, and go to state 49
+    AA   shift, and go to state 50
+    SA   shift, and go to state 51
+    MA   shift, and go to state 52
+    DA   shift, and go to state 53
+
+    ASSIGNMENTOPERATORS  go to state 54
+    INCDECOPERATORS      go to state 55
 
 
 State 27
-
-   43 PRINTSTATEMENT: likho . LRP stringliteral RRP semicolon
-   44               | likho . LRP stringliteral comma identifier RRP semicolon
-
-    LRP  shift, and go to state 50
-
-
-State 28
-
-   59 EXPRESSIONSTATEMENT: identifier . ASSIGNMENTOPERATORS identifier semicolon
-   60                    | identifier . ASSIGNMENTOPERATORS NUMBERS semicolon
-   61                    | identifier . INCDECOPERATORS semicolon
-   63                    | identifier . EA ADDEXPRESSION semicolon
-
-    INO  shift, and go to state 29
-    DCO  shift, and go to state 30
-    EA   shift, and go to state 51
-    AA   shift, and go to state 52
-    SA   shift, and go to state 53
-    MA   shift, and go to state 54
-    DA   shift, and go to state 55
-
-    ASSIGNMENTOPERATORS  go to state 56
-    INCDECOPERATORS      go to state 57
-
-
-State 29
 
    15 INCDECOPERATORS: INO .
 
     $default  reduce using rule 15 (INCDECOPERATORS)
 
 
-State 30
+State 28
 
    16 INCDECOPERATORS: DCO .
 
     $default  reduce using rule 16 (INCDECOPERATORS)
 
 
+State 29
+
+   61 EXPRESSIONSTATEMENT: INCDECOPERATORS . identifier semicolon
+
+    identifier  shift, and go to state 56
+
+
+State 30
+
+   25 COMPOUNDSTATEMENT: LCP MULTIDECLARATION MULTISTATEMENT . RCP
+
+    RCP  shift, and go to state 57
+
+
 State 31
 
-   62 EXPRESSIONSTATEMENT: INCDECOPERATORS . identifier semicolon
+   28 MULTISTATEMENT: STATEMENT . MULTISTATEMENT
 
-    identifier  shift, and go to state 58
+    chalo       shift, and go to state 22
+    jabtak      shift, and go to state 23
+    agar        shift, and go to state 24
+    likho       shift, and go to state 25
+    identifier  shift, and go to state 26
+    INO         shift, and go to state 27
+    DCO         shift, and go to state 28
+
+    $default  reduce using rule 29 (MULTISTATEMENT)
+
+    INCDECOPERATORS      go to state 29
+    MULTISTATEMENT       go to state 58
+    STATEMENT            go to state 31
+    PRINTSTATEMENT       go to state 32
+    SELECTIONSTATEMENT   go to state 33
+    IFSTATEMENT          go to state 34
+    ITERATIONSTATEMENT   go to state 35
+    EXPRESSIONSTATEMENT  go to state 36
 
 
 State 32
 
-   27 COMPOUNDSTATEMENT: LCP MULTIDECLARATION MULTISTATEMENT . RCP
-
-    RCP  shift, and go to state 59
-
-
-State 33
-
-   30 MULTISTATEMENT: STATEMENT . MULTISTATEMENT
-
-    chalo       shift, and go to state 24
-    jabtak      shift, and go to state 25
-    agar        shift, and go to state 26
-    likho       shift, and go to state 27
-    identifier  shift, and go to state 28
-    INO         shift, and go to state 29
-    DCO         shift, and go to state 30
-
-    $default  reduce using rule 31 (MULTISTATEMENT)
-
-    INCDECOPERATORS      go to state 31
-    MULTISTATEMENT       go to state 60
-    STATEMENT            go to state 33
-    PRINTSTATEMENT       go to state 34
-    SELECTIONSTATEMENT   go to state 35
-    IFSTATEMENT          go to state 36
-    ITERATIONSTATEMENT   go to state 37
-    EXPRESSIONSTATEMENT  go to state 38
-
-
-State 34
-
-   42 STATEMENT: PRINTSTATEMENT .
-
-    $default  reduce using rule 42 (STATEMENT)
-
-
-State 35
-
-   40 STATEMENT: SELECTIONSTATEMENT .
+   40 STATEMENT: PRINTSTATEMENT .
 
     $default  reduce using rule 40 (STATEMENT)
 
 
-State 36
+State 33
 
-   45 SELECTIONSTATEMENT: IFSTATEMENT . ELSEIFSTATEMENT ELSESTATEMENT
+   38 STATEMENT: SELECTIONSTATEMENT .
 
-    agarwarna  shift, and go to state 61
-
-    $default  reduce using rule 48 (ELSEIFSTATEMENT)
-
-    ELSEIFSTATEMENT  go to state 62
+    $default  reduce using rule 38 (STATEMENT)
 
 
-State 37
+State 34
 
-   41 STATEMENT: ITERATIONSTATEMENT .
+   44 SELECTIONSTATEMENT: IFSTATEMENT . ELSEIFSTATEMENT ELSESTATEMENT
 
-    $default  reduce using rule 41 (STATEMENT)
+    agarwarna  shift, and go to state 59
+
+    $default  reduce using rule 47 (ELSEIFSTATEMENT)
+
+    ELSEIFSTATEMENT  go to state 60
 
 
-State 38
+State 35
 
-   39 STATEMENT: EXPRESSIONSTATEMENT .
+   39 STATEMENT: ITERATIONSTATEMENT .
 
     $default  reduce using rule 39 (STATEMENT)
 
 
+State 36
+
+   37 STATEMENT: EXPRESSIONSTATEMENT .
+
+    $default  reduce using rule 37 (STATEMENT)
+
+
+State 37
+
+   26 MULTIDECLARATION: DECLARATION MULTIDECLARATION .
+
+    $default  reduce using rule 26 (MULTIDECLARATION)
+
+
+State 38
+
+   36 DECLARATION: BOOLTYPE identifier EA . BOOLOPTIONS semicolon
+
+    sahih   shift, and go to state 61
+    ghalat  shift, and go to state 62
+
+    BOOLOPTIONS  go to state 63
+
+
 State 39
 
-   28 MULTIDECLARATION: DECLARATION MULTIDECLARATION .
-
-    $default  reduce using rule 28 (MULTIDECLARATION)
-
-
-State 40
-
-   38 DECLARATION: BOOLTYPE identifier EA . BOOLOPTIONS semicolon
-
-    sahih   shift, and go to state 63
-    ghalat  shift, and go to state 64
-
-    BOOLOPTIONS  go to state 65
-
-
-State 41
-
-   34 DECLARATION: FLOATTYPE identifier semicolon .
-
-    $default  reduce using rule 34 (DECLARATION)
-
-
-State 42
-
-   37 DECLARATION: FLOATTYPE identifier EA . decimal semicolon
-
-    decimal  shift, and go to state 66
-
-
-State 43
-
-   32 DECLARATION: NUMBERTYPE identifier semicolon .
+   32 DECLARATION: FLOATTYPE identifier semicolon .
 
     $default  reduce using rule 32 (DECLARATION)
 
 
+State 40
+
+   35 DECLARATION: FLOATTYPE identifier EA . decimal semicolon
+
+    decimal  shift, and go to state 64
+
+
+State 41
+
+   30 DECLARATION: NUMBERTYPE identifier semicolon .
+
+    $default  reduce using rule 30 (DECLARATION)
+
+
+State 42
+
+   33 DECLARATION: NUMBERTYPE identifier EA . integer semicolon
+
+    integer  shift, and go to state 65
+
+
+State 43
+
+   31 DECLARATION: STRINGTYPE identifier semicolon .
+
+    $default  reduce using rule 31 (DECLARATION)
+
+
 State 44
 
-   35 DECLARATION: NUMBERTYPE identifier EA . integer semicolon
+   34 DECLARATION: STRINGTYPE identifier EA . stringliteral semicolon
 
-    integer  shift, and go to state 67
+    stringliteral  shift, and go to state 66
 
 
 State 45
 
-   33 DECLARATION: STRINGTYPE identifier semicolon .
+   51 ITERATIONSTATEMENT: chalo LRP . integer se integer RRP COMPOUNDSTATEMENT
 
-    $default  reduce using rule 33 (DECLARATION)
+    integer  shift, and go to state 67
 
 
 State 46
 
-   36 DECLARATION: STRINGTYPE identifier EA . stringliteral semicolon
+   50 ITERATIONSTATEMENT: jabtak LRP . LOGICALEXPRESSION RRP COMPOUNDSTATEMENT
 
-    stringliteral  shift, and go to state 68
+    sahih       shift, and go to state 61
+    ghalat      shift, and go to state 62
+    identifier  shift, and go to state 68
+    integer     shift, and go to state 69
+    LRP         shift, and go to state 70
+    NOT         shift, and go to state 71
+
+    NOTOPERATOR           go to state 72
+    BOOLOPTIONS           go to state 73
+    LOGICALEXPRESSION     go to state 74
+    RELATIONALEXPRESSION  go to state 75
 
 
 State 47
 
-   52 ITERATIONSTATEMENT: chalo LRP . integer se integer RRP COMPOUNDSTATEMENT
+   45 IFSTATEMENT: agar LRP . LOGICALEXPRESSION RRP COMPOUNDSTATEMENT
 
-    integer  shift, and go to state 69
+    sahih       shift, and go to state 61
+    ghalat      shift, and go to state 62
+    identifier  shift, and go to state 68
+    integer     shift, and go to state 69
+    LRP         shift, and go to state 70
+    NOT         shift, and go to state 71
+
+    NOTOPERATOR           go to state 72
+    BOOLOPTIONS           go to state 73
+    LOGICALEXPRESSION     go to state 76
+    RELATIONALEXPRESSION  go to state 75
 
 
 State 48
 
-   51 ITERATIONSTATEMENT: jabtak LRP . LOGICALEXPRESSION RRP COMPOUNDSTATEMENT
+   41 PRINTSTATEMENT: likho LRP . stringliteral RRP semicolon
+   42               | likho LRP . stringliteral comma identifier RRP semicolon
+   43               | likho LRP . identifier RRP semicolon
 
-    sahih       shift, and go to state 63
-    ghalat      shift, and go to state 64
-    identifier  shift, and go to state 70
-    integer     shift, and go to state 71
-    LRP         shift, and go to state 72
-    NOT         shift, and go to state 73
-
-    NOTOPERATOR           go to state 74
-    BOOLOPTIONS           go to state 75
-    LOGICALEXPRESSION     go to state 76
-    RELATIONALEXPRESSION  go to state 77
+    stringliteral  shift, and go to state 77
+    identifier     shift, and go to state 78
 
 
 State 49
 
-   46 IFSTATEMENT: agar LRP . LOGICALEXPRESSION RRP COMPOUNDSTATEMENT
+   62 EXPRESSIONSTATEMENT: identifier EA . ADDEXPRESSION semicolon
 
-    sahih       shift, and go to state 63
-    ghalat      shift, and go to state 64
-    identifier  shift, and go to state 70
-    integer     shift, and go to state 71
-    LRP         shift, and go to state 72
-    NOT         shift, and go to state 73
+    identifier  shift, and go to state 79
+    decimal     shift, and go to state 80
+    integer     shift, and go to state 81
+    LRP         shift, and go to state 82
 
-    NOTOPERATOR           go to state 74
-    BOOLOPTIONS           go to state 75
-    LOGICALEXPRESSION     go to state 78
-    RELATIONALEXPRESSION  go to state 77
+    NUMBERS             go to state 83
+    ADDEXPRESSION       go to state 84
+    MULTIPLYEXPRESSION  go to state 85
+    TERMINALEXPRESSION  go to state 86
 
 
 State 50
-
-   43 PRINTSTATEMENT: likho LRP . stringliteral RRP semicolon
-   44               | likho LRP . stringliteral comma identifier RRP semicolon
-
-    stringliteral  shift, and go to state 79
-
-
-State 51
-
-   63 EXPRESSIONSTATEMENT: identifier EA . ADDEXPRESSION semicolon
-
-    identifier  shift, and go to state 80
-    decimal     shift, and go to state 81
-    integer     shift, and go to state 82
-    LRP         shift, and go to state 83
-
-    NUMBERS             go to state 84
-    ADDEXPRESSION       go to state 85
-    MULTIPLYEXPRESSION  go to state 86
-    TERMINALEXPRESSION  go to state 87
-
-
-State 52
 
     4 ASSIGNMENTOPERATORS: AA .
 
     $default  reduce using rule 4 (ASSIGNMENTOPERATORS)
 
 
-State 53
+State 51
 
     5 ASSIGNMENTOPERATORS: SA .
 
     $default  reduce using rule 5 (ASSIGNMENTOPERATORS)
 
 
-State 54
+State 52
 
     2 ASSIGNMENTOPERATORS: MA .
 
     $default  reduce using rule 2 (ASSIGNMENTOPERATORS)
 
 
-State 55
+State 53
 
     3 ASSIGNMENTOPERATORS: DA .
 
     $default  reduce using rule 3 (ASSIGNMENTOPERATORS)
 
 
+State 54
+
+   58 EXPRESSIONSTATEMENT: identifier ASSIGNMENTOPERATORS . identifier semicolon
+   59                    | identifier ASSIGNMENTOPERATORS . NUMBERS semicolon
+
+    identifier  shift, and go to state 87
+    decimal     shift, and go to state 80
+    integer     shift, and go to state 81
+
+    NUMBERS  go to state 88
+
+
+State 55
+
+   60 EXPRESSIONSTATEMENT: identifier INCDECOPERATORS . semicolon
+
+    semicolon  shift, and go to state 89
+
+
 State 56
 
-   59 EXPRESSIONSTATEMENT: identifier ASSIGNMENTOPERATORS . identifier semicolon
-   60                    | identifier ASSIGNMENTOPERATORS . NUMBERS semicolon
-
-    identifier  shift, and go to state 88
-    decimal     shift, and go to state 81
-    integer     shift, and go to state 82
-
-    NUMBERS  go to state 89
-
-
-State 57
-
-   61 EXPRESSIONSTATEMENT: identifier INCDECOPERATORS . semicolon
+   61 EXPRESSIONSTATEMENT: INCDECOPERATORS identifier . semicolon
 
     semicolon  shift, and go to state 90
 
 
+State 57
+
+   25 COMPOUNDSTATEMENT: LCP MULTIDECLARATION MULTISTATEMENT RCP .
+
+    $default  reduce using rule 25 (COMPOUNDSTATEMENT)
+
+
 State 58
 
-   62 EXPRESSIONSTATEMENT: INCDECOPERATORS identifier . semicolon
+   28 MULTISTATEMENT: STATEMENT MULTISTATEMENT .
 
-    semicolon  shift, and go to state 91
+    $default  reduce using rule 28 (MULTISTATEMENT)
 
 
 State 59
 
-   27 COMPOUNDSTATEMENT: LCP MULTIDECLARATION MULTISTATEMENT RCP .
+   46 ELSEIFSTATEMENT: agarwarna . LRP LOGICALEXPRESSION RRP COMPOUNDSTATEMENT
 
-    $default  reduce using rule 27 (COMPOUNDSTATEMENT)
+    LRP  shift, and go to state 91
 
 
 State 60
 
-   30 MULTISTATEMENT: STATEMENT MULTISTATEMENT .
+   44 SELECTIONSTATEMENT: IFSTATEMENT ELSEIFSTATEMENT . ELSESTATEMENT
 
-    $default  reduce using rule 30 (MULTISTATEMENT)
+    warna  shift, and go to state 92
+
+    $default  reduce using rule 49 (ELSESTATEMENT)
+
+    ELSESTATEMENT  go to state 93
 
 
 State 61
-
-   47 ELSEIFSTATEMENT: agarwarna . LRP LOGICALEXPRESSION RRP COMPOUNDSTATEMENT
-
-    LRP  shift, and go to state 92
-
-
-State 62
-
-   45 SELECTIONSTATEMENT: IFSTATEMENT ELSEIFSTATEMENT . ELSESTATEMENT
-
-    warna  shift, and go to state 93
-
-    $default  reduce using rule 50 (ELSESTATEMENT)
-
-    ELSESTATEMENT  go to state 94
-
-
-State 63
 
    18 BOOLOPTIONS: sahih .
 
     $default  reduce using rule 18 (BOOLOPTIONS)
 
 
-State 64
+State 62
 
    19 BOOLOPTIONS: ghalat .
 
     $default  reduce using rule 19 (BOOLOPTIONS)
 
 
-State 65
+State 63
 
-   38 DECLARATION: BOOLTYPE identifier EA BOOLOPTIONS . semicolon
+   36 DECLARATION: BOOLTYPE identifier EA BOOLOPTIONS . semicolon
+
+    semicolon  shift, and go to state 94
+
+
+State 64
+
+   35 DECLARATION: FLOATTYPE identifier EA decimal . semicolon
 
     semicolon  shift, and go to state 95
 
 
-State 66
+State 65
 
-   37 DECLARATION: FLOATTYPE identifier EA decimal . semicolon
+   33 DECLARATION: NUMBERTYPE identifier EA integer . semicolon
 
     semicolon  shift, and go to state 96
 
 
-State 67
+State 66
 
-   35 DECLARATION: NUMBERTYPE identifier EA integer . semicolon
+   34 DECLARATION: STRINGTYPE identifier EA stringliteral . semicolon
 
     semicolon  shift, and go to state 97
 
 
+State 67
+
+   51 ITERATIONSTATEMENT: chalo LRP integer . se integer RRP COMPOUNDSTATEMENT
+
+    se  shift, and go to state 98
+
+
 State 68
 
-   36 DECLARATION: STRINGTYPE identifier EA stringliteral . semicolon
+   55 RELATIONALEXPRESSION: identifier . RELATIONALOPERATORS integer
 
-    semicolon  shift, and go to state 98
+    LT   shift, and go to state 99
+    LTE  shift, and go to state 100
+    GT   shift, and go to state 101
+    GTE  shift, and go to state 102
+    IEQ  shift, and go to state 103
+    NEQ  shift, and go to state 104
+
+    RELATIONALOPERATORS  go to state 105
 
 
 State 69
 
-   52 ITERATIONSTATEMENT: chalo LRP integer . se integer RRP COMPOUNDSTATEMENT
+   56 RELATIONALEXPRESSION: integer . RELATIONALOPERATORS integer
 
-    se  shift, and go to state 99
-
-
-State 70
-
-   56 RELATIONALEXPRESSION: identifier . RELATIONALOPERATORS integer
-
-    LT   shift, and go to state 100
-    LTE  shift, and go to state 101
-    GT   shift, and go to state 102
-    GTE  shift, and go to state 103
-    IEQ  shift, and go to state 104
-    NEQ  shift, and go to state 105
+    LT   shift, and go to state 99
+    LTE  shift, and go to state 100
+    GT   shift, and go to state 101
+    GTE  shift, and go to state 102
+    IEQ  shift, and go to state 103
+    NEQ  shift, and go to state 104
 
     RELATIONALOPERATORS  go to state 106
 
 
+State 70
+
+   52 LOGICALEXPRESSION: LRP . RELATIONALEXPRESSION RRP LOGICALOPERATORS LRP RELATIONALEXPRESSION RRP
+
+    sahih       shift, and go to state 61
+    ghalat      shift, and go to state 62
+    identifier  shift, and go to state 68
+    integer     shift, and go to state 69
+
+    BOOLOPTIONS           go to state 73
+    RELATIONALEXPRESSION  go to state 107
+
+
 State 71
-
-   57 RELATIONALEXPRESSION: integer . RELATIONALOPERATORS integer
-
-    LT   shift, and go to state 100
-    LTE  shift, and go to state 101
-    GT   shift, and go to state 102
-    GTE  shift, and go to state 103
-    IEQ  shift, and go to state 104
-    NEQ  shift, and go to state 105
-
-    RELATIONALOPERATORS  go to state 107
-
-
-State 72
-
-   53 LOGICALEXPRESSION: LRP . RELATIONALEXPRESSION RRP LOGICALOPERATORS LRP RELATIONALEXPRESSION RRP
-
-    sahih       shift, and go to state 63
-    ghalat      shift, and go to state 64
-    identifier  shift, and go to state 70
-    integer     shift, and go to state 71
-
-    BOOLOPTIONS           go to state 75
-    RELATIONALEXPRESSION  go to state 108
-
-
-State 73
 
    14 NOTOPERATOR: NOT .
 
     $default  reduce using rule 14 (NOTOPERATOR)
 
 
+State 72
+
+   53 LOGICALEXPRESSION: NOTOPERATOR . LRP RELATIONALEXPRESSION RRP
+
+    LRP  shift, and go to state 108
+
+
+State 73
+
+   57 RELATIONALEXPRESSION: BOOLOPTIONS .
+
+    $default  reduce using rule 57 (RELATIONALEXPRESSION)
+
+
 State 74
 
-   54 LOGICALEXPRESSION: NOTOPERATOR . LRP RELATIONALEXPRESSION RRP
+   50 ITERATIONSTATEMENT: jabtak LRP LOGICALEXPRESSION . RRP COMPOUNDSTATEMENT
 
-    LRP  shift, and go to state 109
+    RRP  shift, and go to state 109
 
 
 State 75
 
-   58 RELATIONALEXPRESSION: BOOLOPTIONS .
+   54 LOGICALEXPRESSION: RELATIONALEXPRESSION .
 
-    $default  reduce using rule 58 (RELATIONALEXPRESSION)
+    $default  reduce using rule 54 (LOGICALEXPRESSION)
 
 
 State 76
 
-   51 ITERATIONSTATEMENT: jabtak LRP LOGICALEXPRESSION . RRP COMPOUNDSTATEMENT
+   45 IFSTATEMENT: agar LRP LOGICALEXPRESSION . RRP COMPOUNDSTATEMENT
 
     RRP  shift, and go to state 110
 
 
 State 77
 
-   55 LOGICALEXPRESSION: RELATIONALEXPRESSION .
+   41 PRINTSTATEMENT: likho LRP stringliteral . RRP semicolon
+   42               | likho LRP stringliteral . comma identifier RRP semicolon
 
-    $default  reduce using rule 55 (LOGICALEXPRESSION)
+    comma  shift, and go to state 111
+    RRP    shift, and go to state 112
 
 
 State 78
 
-   46 IFSTATEMENT: agar LRP LOGICALEXPRESSION . RRP COMPOUNDSTATEMENT
+   43 PRINTSTATEMENT: likho LRP identifier . RRP semicolon
 
-    RRP  shift, and go to state 111
+    RRP  shift, and go to state 113
 
 
 State 79
 
-   43 PRINTSTATEMENT: likho LRP stringliteral . RRP semicolon
-   44               | likho LRP stringliteral . comma identifier RRP semicolon
-
-    comma  shift, and go to state 112
-    RRP    shift, and go to state 113
-
-
-State 80
-
-   71 TERMINALEXPRESSION: identifier .
-
-    $default  reduce using rule 71 (TERMINALEXPRESSION)
-
-
-State 81
-
-   26 NUMBERS: decimal .
-
-    $default  reduce using rule 26 (NUMBERS)
-
-
-State 82
-
-   25 NUMBERS: integer .
-
-    $default  reduce using rule 25 (NUMBERS)
-
-
-State 83
-
-   72 TERMINALEXPRESSION: LRP . ADDEXPRESSION RRP
-
-    identifier  shift, and go to state 80
-    decimal     shift, and go to state 81
-    integer     shift, and go to state 82
-    LRP         shift, and go to state 83
-
-    NUMBERS             go to state 84
-    ADDEXPRESSION       go to state 114
-    MULTIPLYEXPRESSION  go to state 86
-    TERMINALEXPRESSION  go to state 87
-
-
-State 84
-
-   70 TERMINALEXPRESSION: NUMBERS .
+   70 TERMINALEXPRESSION: identifier .
 
     $default  reduce using rule 70 (TERMINALEXPRESSION)
 
 
-State 85
+State 80
 
-   63 EXPRESSIONSTATEMENT: identifier EA ADDEXPRESSION . semicolon
-   64 ADDEXPRESSION: ADDEXPRESSION . PLS MULTIPLYEXPRESSION
-   65              | ADDEXPRESSION . MIS MULTIPLYEXPRESSION
+   24 NUMBERS: decimal .
+
+    $default  reduce using rule 24 (NUMBERS)
+
+
+State 81
+
+   23 NUMBERS: integer .
+
+    $default  reduce using rule 23 (NUMBERS)
+
+
+State 82
+
+   71 TERMINALEXPRESSION: LRP . ADDEXPRESSION RRP
+
+    identifier  shift, and go to state 79
+    decimal     shift, and go to state 80
+    integer     shift, and go to state 81
+    LRP         shift, and go to state 82
+
+    NUMBERS             go to state 83
+    ADDEXPRESSION       go to state 114
+    MULTIPLYEXPRESSION  go to state 85
+    TERMINALEXPRESSION  go to state 86
+
+
+State 83
+
+   69 TERMINALEXPRESSION: NUMBERS .
+
+    $default  reduce using rule 69 (TERMINALEXPRESSION)
+
+
+State 84
+
+   62 EXPRESSIONSTATEMENT: identifier EA ADDEXPRESSION . semicolon
+   63 ADDEXPRESSION: ADDEXPRESSION . PLS MULTIPLYEXPRESSION
+   64              | ADDEXPRESSION . MIS MULTIPLYEXPRESSION
 
     semicolon  shift, and go to state 115
     PLS        shift, and go to state 116
     MIS        shift, and go to state 117
 
 
-State 86
-
-   66 ADDEXPRESSION: MULTIPLYEXPRESSION .
-   67 MULTIPLYEXPRESSION: MULTIPLYEXPRESSION . MUL TERMINALEXPRESSION
-   68                   | MULTIPLYEXPRESSION . DIV TERMINALEXPRESSION
-
-    MUL  shift, and go to state 118
-    DIV  shift, and go to state 119
-
-    $default  reduce using rule 66 (ADDEXPRESSION)
-
-
-State 87
-
-   69 MULTIPLYEXPRESSION: TERMINALEXPRESSION .
-
-    $default  reduce using rule 69 (MULTIPLYEXPRESSION)
-
-
-State 88
-
-   59 EXPRESSIONSTATEMENT: identifier ASSIGNMENTOPERATORS identifier . semicolon
-
-    semicolon  shift, and go to state 120
-
-
-State 89
-
-   60 EXPRESSIONSTATEMENT: identifier ASSIGNMENTOPERATORS NUMBERS . semicolon
-
-    semicolon  shift, and go to state 121
-
-
-State 90
-
-   61 EXPRESSIONSTATEMENT: identifier INCDECOPERATORS semicolon .
-
-    $default  reduce using rule 61 (EXPRESSIONSTATEMENT)
-
-
-State 91
-
-   62 EXPRESSIONSTATEMENT: INCDECOPERATORS identifier semicolon .
-
-    $default  reduce using rule 62 (EXPRESSIONSTATEMENT)
-
-
-State 92
-
-   47 ELSEIFSTATEMENT: agarwarna LRP . LOGICALEXPRESSION RRP COMPOUNDSTATEMENT
-
-    sahih       shift, and go to state 63
-    ghalat      shift, and go to state 64
-    identifier  shift, and go to state 70
-    integer     shift, and go to state 71
-    LRP         shift, and go to state 72
-    NOT         shift, and go to state 73
-
-    NOTOPERATOR           go to state 74
-    BOOLOPTIONS           go to state 75
-    LOGICALEXPRESSION     go to state 122
-    RELATIONALEXPRESSION  go to state 77
-
-
-State 93
-
-   49 ELSESTATEMENT: warna . COMPOUNDSTATEMENT
-
-    LCP  shift, and go to state 6
-
-    COMPOUNDSTATEMENT  go to state 123
-
-
-State 94
-
-   45 SELECTIONSTATEMENT: IFSTATEMENT ELSEIFSTATEMENT ELSESTATEMENT .
-
-    $default  reduce using rule 45 (SELECTIONSTATEMENT)
-
-
-State 95
-
-   38 DECLARATION: BOOLTYPE identifier EA BOOLOPTIONS semicolon .
-
-    $default  reduce using rule 38 (DECLARATION)
-
-
-State 96
-
-   37 DECLARATION: FLOATTYPE identifier EA decimal semicolon .
-
-    $default  reduce using rule 37 (DECLARATION)
-
-
-State 97
-
-   35 DECLARATION: NUMBERTYPE identifier EA integer semicolon .
-
-    $default  reduce using rule 35 (DECLARATION)
-
-
-State 98
-
-   36 DECLARATION: STRINGTYPE identifier EA stringliteral semicolon .
-
-    $default  reduce using rule 36 (DECLARATION)
-
-
-State 99
-
-   52 ITERATIONSTATEMENT: chalo LRP integer se . integer RRP COMPOUNDSTATEMENT
-
-    integer  shift, and go to state 124
-
-
-State 100
-
-    7 RELATIONALOPERATORS: LT .
-
-    $default  reduce using rule 7 (RELATIONALOPERATORS)
-
-
-State 101
-
-    9 RELATIONALOPERATORS: LTE .
-
-    $default  reduce using rule 9 (RELATIONALOPERATORS)
-
-
-State 102
-
-    6 RELATIONALOPERATORS: GT .
-
-    $default  reduce using rule 6 (RELATIONALOPERATORS)
-
-
-State 103
-
-    8 RELATIONALOPERATORS: GTE .
-
-    $default  reduce using rule 8 (RELATIONALOPERATORS)
-
-
-State 104
-
-   10 RELATIONALOPERATORS: IEQ .
-
-    $default  reduce using rule 10 (RELATIONALOPERATORS)
-
-
-State 105
-
-   11 RELATIONALOPERATORS: NEQ .
-
-    $default  reduce using rule 11 (RELATIONALOPERATORS)
-
-
-State 106
-
-   56 RELATIONALEXPRESSION: identifier RELATIONALOPERATORS . integer
-
-    integer  shift, and go to state 125
-
-
-State 107
-
-   57 RELATIONALEXPRESSION: integer RELATIONALOPERATORS . integer
-
-    integer  shift, and go to state 126
-
-
-State 108
-
-   53 LOGICALEXPRESSION: LRP RELATIONALEXPRESSION . RRP LOGICALOPERATORS LRP RELATIONALEXPRESSION RRP
-
-    RRP  shift, and go to state 127
-
-
-State 109
-
-   54 LOGICALEXPRESSION: NOTOPERATOR LRP . RELATIONALEXPRESSION RRP
-
-    sahih       shift, and go to state 63
-    ghalat      shift, and go to state 64
-    identifier  shift, and go to state 70
-    integer     shift, and go to state 71
-
-    BOOLOPTIONS           go to state 75
-    RELATIONALEXPRESSION  go to state 128
-
-
-State 110
-
-   51 ITERATIONSTATEMENT: jabtak LRP LOGICALEXPRESSION RRP . COMPOUNDSTATEMENT
-
-    LCP  shift, and go to state 6
-
-    COMPOUNDSTATEMENT  go to state 129
-
-
-State 111
-
-   46 IFSTATEMENT: agar LRP LOGICALEXPRESSION RRP . COMPOUNDSTATEMENT
-
-    LCP  shift, and go to state 6
-
-    COMPOUNDSTATEMENT  go to state 130
-
-
-State 112
-
-   44 PRINTSTATEMENT: likho LRP stringliteral comma . identifier RRP semicolon
-
-    identifier  shift, and go to state 131
-
-
-State 113
-
-   43 PRINTSTATEMENT: likho LRP stringliteral RRP . semicolon
-
-    semicolon  shift, and go to state 132
-
-
-State 114
-
-   64 ADDEXPRESSION: ADDEXPRESSION . PLS MULTIPLYEXPRESSION
-   65              | ADDEXPRESSION . MIS MULTIPLYEXPRESSION
-   72 TERMINALEXPRESSION: LRP ADDEXPRESSION . RRP
-
-    RRP  shift, and go to state 133
-    PLS  shift, and go to state 116
-    MIS  shift, and go to state 117
-
-
-State 115
-
-   63 EXPRESSIONSTATEMENT: identifier EA ADDEXPRESSION semicolon .
-
-    $default  reduce using rule 63 (EXPRESSIONSTATEMENT)
-
-
-State 116
-
-   64 ADDEXPRESSION: ADDEXPRESSION PLS . MULTIPLYEXPRESSION
-
-    identifier  shift, and go to state 80
-    decimal     shift, and go to state 81
-    integer     shift, and go to state 82
-    LRP         shift, and go to state 83
-
-    NUMBERS             go to state 84
-    MULTIPLYEXPRESSION  go to state 134
-    TERMINALEXPRESSION  go to state 87
-
-
-State 117
-
-   65 ADDEXPRESSION: ADDEXPRESSION MIS . MULTIPLYEXPRESSION
-
-    identifier  shift, and go to state 80
-    decimal     shift, and go to state 81
-    integer     shift, and go to state 82
-    LRP         shift, and go to state 83
-
-    NUMBERS             go to state 84
-    MULTIPLYEXPRESSION  go to state 135
-    TERMINALEXPRESSION  go to state 87
-
-
-State 118
-
-   67 MULTIPLYEXPRESSION: MULTIPLYEXPRESSION MUL . TERMINALEXPRESSION
-
-    identifier  shift, and go to state 80
-    decimal     shift, and go to state 81
-    integer     shift, and go to state 82
-    LRP         shift, and go to state 83
-
-    NUMBERS             go to state 84
-    TERMINALEXPRESSION  go to state 136
-
-
-State 119
-
-   68 MULTIPLYEXPRESSION: MULTIPLYEXPRESSION DIV . TERMINALEXPRESSION
-
-    identifier  shift, and go to state 80
-    decimal     shift, and go to state 81
-    integer     shift, and go to state 82
-    LRP         shift, and go to state 83
-
-    NUMBERS             go to state 84
-    TERMINALEXPRESSION  go to state 137
-
-
-State 120
-
-   59 EXPRESSIONSTATEMENT: identifier ASSIGNMENTOPERATORS identifier semicolon .
-
-    $default  reduce using rule 59 (EXPRESSIONSTATEMENT)
-
-
-State 121
-
-   60 EXPRESSIONSTATEMENT: identifier ASSIGNMENTOPERATORS NUMBERS semicolon .
-
-    $default  reduce using rule 60 (EXPRESSIONSTATEMENT)
-
-
-State 122
-
-   47 ELSEIFSTATEMENT: agarwarna LRP LOGICALEXPRESSION . RRP COMPOUNDSTATEMENT
-
-    RRP  shift, and go to state 138
-
-
-State 123
-
-   49 ELSESTATEMENT: warna COMPOUNDSTATEMENT .
-
-    $default  reduce using rule 49 (ELSESTATEMENT)
-
-
-State 124
-
-   52 ITERATIONSTATEMENT: chalo LRP integer se integer . RRP COMPOUNDSTATEMENT
-
-    RRP  shift, and go to state 139
-
-
-State 125
-
-   56 RELATIONALEXPRESSION: identifier RELATIONALOPERATORS integer .
-
-    $default  reduce using rule 56 (RELATIONALEXPRESSION)
-
-
-State 126
-
-   57 RELATIONALEXPRESSION: integer RELATIONALOPERATORS integer .
-
-    $default  reduce using rule 57 (RELATIONALEXPRESSION)
-
-
-State 127
-
-   53 LOGICALEXPRESSION: LRP RELATIONALEXPRESSION RRP . LOGICALOPERATORS LRP RELATIONALEXPRESSION RRP
-
-    AND  shift, and go to state 140
-    OR   shift, and go to state 141
-
-    LOGICALOPERATORS  go to state 142
-
-
-State 128
-
-   54 LOGICALEXPRESSION: NOTOPERATOR LRP RELATIONALEXPRESSION . RRP
-
-    RRP  shift, and go to state 143
-
-
-State 129
-
-   51 ITERATIONSTATEMENT: jabtak LRP LOGICALEXPRESSION RRP COMPOUNDSTATEMENT .
-
-    $default  reduce using rule 51 (ITERATIONSTATEMENT)
-
-
-State 130
-
-   46 IFSTATEMENT: agar LRP LOGICALEXPRESSION RRP COMPOUNDSTATEMENT .
-
-    $default  reduce using rule 46 (IFSTATEMENT)
-
-
-State 131
-
-   44 PRINTSTATEMENT: likho LRP stringliteral comma identifier . RRP semicolon
-
-    RRP  shift, and go to state 144
-
-
-State 132
-
-   43 PRINTSTATEMENT: likho LRP stringliteral RRP semicolon .
-
-    $default  reduce using rule 43 (PRINTSTATEMENT)
-
-
-State 133
-
-   72 TERMINALEXPRESSION: LRP ADDEXPRESSION RRP .
-
-    $default  reduce using rule 72 (TERMINALEXPRESSION)
-
-
-State 134
-
-   64 ADDEXPRESSION: ADDEXPRESSION PLS MULTIPLYEXPRESSION .
-   67 MULTIPLYEXPRESSION: MULTIPLYEXPRESSION . MUL TERMINALEXPRESSION
-   68                   | MULTIPLYEXPRESSION . DIV TERMINALEXPRESSION
-
-    MUL  shift, and go to state 118
-    DIV  shift, and go to state 119
-
-    $default  reduce using rule 64 (ADDEXPRESSION)
-
-
-State 135
-
-   65 ADDEXPRESSION: ADDEXPRESSION MIS MULTIPLYEXPRESSION .
-   67 MULTIPLYEXPRESSION: MULTIPLYEXPRESSION . MUL TERMINALEXPRESSION
-   68                   | MULTIPLYEXPRESSION . DIV TERMINALEXPRESSION
+State 85
+
+   65 ADDEXPRESSION: MULTIPLYEXPRESSION .
+   66 MULTIPLYEXPRESSION: MULTIPLYEXPRESSION . MUL TERMINALEXPRESSION
+   67                   | MULTIPLYEXPRESSION . DIV TERMINALEXPRESSION
 
     MUL  shift, and go to state 118
     DIV  shift, and go to state 119
@@ -1417,32 +998,445 @@ State 135
     $default  reduce using rule 65 (ADDEXPRESSION)
 
 
-State 136
+State 86
 
-   67 MULTIPLYEXPRESSION: MULTIPLYEXPRESSION MUL TERMINALEXPRESSION .
-
-    $default  reduce using rule 67 (MULTIPLYEXPRESSION)
-
-
-State 137
-
-   68 MULTIPLYEXPRESSION: MULTIPLYEXPRESSION DIV TERMINALEXPRESSION .
+   68 MULTIPLYEXPRESSION: TERMINALEXPRESSION .
 
     $default  reduce using rule 68 (MULTIPLYEXPRESSION)
 
 
-State 138
+State 87
 
-   47 ELSEIFSTATEMENT: agarwarna LRP LOGICALEXPRESSION RRP . COMPOUNDSTATEMENT
+   58 EXPRESSIONSTATEMENT: identifier ASSIGNMENTOPERATORS identifier . semicolon
+
+    semicolon  shift, and go to state 120
+
+
+State 88
+
+   59 EXPRESSIONSTATEMENT: identifier ASSIGNMENTOPERATORS NUMBERS . semicolon
+
+    semicolon  shift, and go to state 121
+
+
+State 89
+
+   60 EXPRESSIONSTATEMENT: identifier INCDECOPERATORS semicolon .
+
+    $default  reduce using rule 60 (EXPRESSIONSTATEMENT)
+
+
+State 90
+
+   61 EXPRESSIONSTATEMENT: INCDECOPERATORS identifier semicolon .
+
+    $default  reduce using rule 61 (EXPRESSIONSTATEMENT)
+
+
+State 91
+
+   46 ELSEIFSTATEMENT: agarwarna LRP . LOGICALEXPRESSION RRP COMPOUNDSTATEMENT
+
+    sahih       shift, and go to state 61
+    ghalat      shift, and go to state 62
+    identifier  shift, and go to state 68
+    integer     shift, and go to state 69
+    LRP         shift, and go to state 70
+    NOT         shift, and go to state 71
+
+    NOTOPERATOR           go to state 72
+    BOOLOPTIONS           go to state 73
+    LOGICALEXPRESSION     go to state 122
+    RELATIONALEXPRESSION  go to state 75
+
+
+State 92
+
+   48 ELSESTATEMENT: warna . COMPOUNDSTATEMENT
 
     LCP  shift, and go to state 6
 
-    COMPOUNDSTATEMENT  go to state 145
+    COMPOUNDSTATEMENT  go to state 123
+
+
+State 93
+
+   44 SELECTIONSTATEMENT: IFSTATEMENT ELSEIFSTATEMENT ELSESTATEMENT .
+
+    $default  reduce using rule 44 (SELECTIONSTATEMENT)
+
+
+State 94
+
+   36 DECLARATION: BOOLTYPE identifier EA BOOLOPTIONS semicolon .
+
+    $default  reduce using rule 36 (DECLARATION)
+
+
+State 95
+
+   35 DECLARATION: FLOATTYPE identifier EA decimal semicolon .
+
+    $default  reduce using rule 35 (DECLARATION)
+
+
+State 96
+
+   33 DECLARATION: NUMBERTYPE identifier EA integer semicolon .
+
+    $default  reduce using rule 33 (DECLARATION)
+
+
+State 97
+
+   34 DECLARATION: STRINGTYPE identifier EA stringliteral semicolon .
+
+    $default  reduce using rule 34 (DECLARATION)
+
+
+State 98
+
+   51 ITERATIONSTATEMENT: chalo LRP integer se . integer RRP COMPOUNDSTATEMENT
+
+    integer  shift, and go to state 124
+
+
+State 99
+
+    7 RELATIONALOPERATORS: LT .
+
+    $default  reduce using rule 7 (RELATIONALOPERATORS)
+
+
+State 100
+
+    9 RELATIONALOPERATORS: LTE .
+
+    $default  reduce using rule 9 (RELATIONALOPERATORS)
+
+
+State 101
+
+    6 RELATIONALOPERATORS: GT .
+
+    $default  reduce using rule 6 (RELATIONALOPERATORS)
+
+
+State 102
+
+    8 RELATIONALOPERATORS: GTE .
+
+    $default  reduce using rule 8 (RELATIONALOPERATORS)
+
+
+State 103
+
+   10 RELATIONALOPERATORS: IEQ .
+
+    $default  reduce using rule 10 (RELATIONALOPERATORS)
+
+
+State 104
+
+   11 RELATIONALOPERATORS: NEQ .
+
+    $default  reduce using rule 11 (RELATIONALOPERATORS)
+
+
+State 105
+
+   55 RELATIONALEXPRESSION: identifier RELATIONALOPERATORS . integer
+
+    integer  shift, and go to state 125
+
+
+State 106
+
+   56 RELATIONALEXPRESSION: integer RELATIONALOPERATORS . integer
+
+    integer  shift, and go to state 126
+
+
+State 107
+
+   52 LOGICALEXPRESSION: LRP RELATIONALEXPRESSION . RRP LOGICALOPERATORS LRP RELATIONALEXPRESSION RRP
+
+    RRP  shift, and go to state 127
+
+
+State 108
+
+   53 LOGICALEXPRESSION: NOTOPERATOR LRP . RELATIONALEXPRESSION RRP
+
+    sahih       shift, and go to state 61
+    ghalat      shift, and go to state 62
+    identifier  shift, and go to state 68
+    integer     shift, and go to state 69
+
+    BOOLOPTIONS           go to state 73
+    RELATIONALEXPRESSION  go to state 128
+
+
+State 109
+
+   50 ITERATIONSTATEMENT: jabtak LRP LOGICALEXPRESSION RRP . COMPOUNDSTATEMENT
+
+    LCP  shift, and go to state 6
+
+    COMPOUNDSTATEMENT  go to state 129
+
+
+State 110
+
+   45 IFSTATEMENT: agar LRP LOGICALEXPRESSION RRP . COMPOUNDSTATEMENT
+
+    LCP  shift, and go to state 6
+
+    COMPOUNDSTATEMENT  go to state 130
+
+
+State 111
+
+   42 PRINTSTATEMENT: likho LRP stringliteral comma . identifier RRP semicolon
+
+    identifier  shift, and go to state 131
+
+
+State 112
+
+   41 PRINTSTATEMENT: likho LRP stringliteral RRP . semicolon
+
+    semicolon  shift, and go to state 132
+
+
+State 113
+
+   43 PRINTSTATEMENT: likho LRP identifier RRP . semicolon
+
+    semicolon  shift, and go to state 133
+
+
+State 114
+
+   63 ADDEXPRESSION: ADDEXPRESSION . PLS MULTIPLYEXPRESSION
+   64              | ADDEXPRESSION . MIS MULTIPLYEXPRESSION
+   71 TERMINALEXPRESSION: LRP ADDEXPRESSION . RRP
+
+    RRP  shift, and go to state 134
+    PLS  shift, and go to state 116
+    MIS  shift, and go to state 117
+
+
+State 115
+
+   62 EXPRESSIONSTATEMENT: identifier EA ADDEXPRESSION semicolon .
+
+    $default  reduce using rule 62 (EXPRESSIONSTATEMENT)
+
+
+State 116
+
+   63 ADDEXPRESSION: ADDEXPRESSION PLS . MULTIPLYEXPRESSION
+
+    identifier  shift, and go to state 79
+    decimal     shift, and go to state 80
+    integer     shift, and go to state 81
+    LRP         shift, and go to state 82
+
+    NUMBERS             go to state 83
+    MULTIPLYEXPRESSION  go to state 135
+    TERMINALEXPRESSION  go to state 86
+
+
+State 117
+
+   64 ADDEXPRESSION: ADDEXPRESSION MIS . MULTIPLYEXPRESSION
+
+    identifier  shift, and go to state 79
+    decimal     shift, and go to state 80
+    integer     shift, and go to state 81
+    LRP         shift, and go to state 82
+
+    NUMBERS             go to state 83
+    MULTIPLYEXPRESSION  go to state 136
+    TERMINALEXPRESSION  go to state 86
+
+
+State 118
+
+   66 MULTIPLYEXPRESSION: MULTIPLYEXPRESSION MUL . TERMINALEXPRESSION
+
+    identifier  shift, and go to state 79
+    decimal     shift, and go to state 80
+    integer     shift, and go to state 81
+    LRP         shift, and go to state 82
+
+    NUMBERS             go to state 83
+    TERMINALEXPRESSION  go to state 137
+
+
+State 119
+
+   67 MULTIPLYEXPRESSION: MULTIPLYEXPRESSION DIV . TERMINALEXPRESSION
+
+    identifier  shift, and go to state 79
+    decimal     shift, and go to state 80
+    integer     shift, and go to state 81
+    LRP         shift, and go to state 82
+
+    NUMBERS             go to state 83
+    TERMINALEXPRESSION  go to state 138
+
+
+State 120
+
+   58 EXPRESSIONSTATEMENT: identifier ASSIGNMENTOPERATORS identifier semicolon .
+
+    $default  reduce using rule 58 (EXPRESSIONSTATEMENT)
+
+
+State 121
+
+   59 EXPRESSIONSTATEMENT: identifier ASSIGNMENTOPERATORS NUMBERS semicolon .
+
+    $default  reduce using rule 59 (EXPRESSIONSTATEMENT)
+
+
+State 122
+
+   46 ELSEIFSTATEMENT: agarwarna LRP LOGICALEXPRESSION . RRP COMPOUNDSTATEMENT
+
+    RRP  shift, and go to state 139
+
+
+State 123
+
+   48 ELSESTATEMENT: warna COMPOUNDSTATEMENT .
+
+    $default  reduce using rule 48 (ELSESTATEMENT)
+
+
+State 124
+
+   51 ITERATIONSTATEMENT: chalo LRP integer se integer . RRP COMPOUNDSTATEMENT
+
+    RRP  shift, and go to state 140
+
+
+State 125
+
+   55 RELATIONALEXPRESSION: identifier RELATIONALOPERATORS integer .
+
+    $default  reduce using rule 55 (RELATIONALEXPRESSION)
+
+
+State 126
+
+   56 RELATIONALEXPRESSION: integer RELATIONALOPERATORS integer .
+
+    $default  reduce using rule 56 (RELATIONALEXPRESSION)
+
+
+State 127
+
+   52 LOGICALEXPRESSION: LRP RELATIONALEXPRESSION RRP . LOGICALOPERATORS LRP RELATIONALEXPRESSION RRP
+
+    AND  shift, and go to state 141
+    OR   shift, and go to state 142
+
+    LOGICALOPERATORS  go to state 143
+
+
+State 128
+
+   53 LOGICALEXPRESSION: NOTOPERATOR LRP RELATIONALEXPRESSION . RRP
+
+    RRP  shift, and go to state 144
+
+
+State 129
+
+   50 ITERATIONSTATEMENT: jabtak LRP LOGICALEXPRESSION RRP COMPOUNDSTATEMENT .
+
+    $default  reduce using rule 50 (ITERATIONSTATEMENT)
+
+
+State 130
+
+   45 IFSTATEMENT: agar LRP LOGICALEXPRESSION RRP COMPOUNDSTATEMENT .
+
+    $default  reduce using rule 45 (IFSTATEMENT)
+
+
+State 131
+
+   42 PRINTSTATEMENT: likho LRP stringliteral comma identifier . RRP semicolon
+
+    RRP  shift, and go to state 145
+
+
+State 132
+
+   41 PRINTSTATEMENT: likho LRP stringliteral RRP semicolon .
+
+    $default  reduce using rule 41 (PRINTSTATEMENT)
+
+
+State 133
+
+   43 PRINTSTATEMENT: likho LRP identifier RRP semicolon .
+
+    $default  reduce using rule 43 (PRINTSTATEMENT)
+
+
+State 134
+
+   71 TERMINALEXPRESSION: LRP ADDEXPRESSION RRP .
+
+    $default  reduce using rule 71 (TERMINALEXPRESSION)
+
+
+State 135
+
+   63 ADDEXPRESSION: ADDEXPRESSION PLS MULTIPLYEXPRESSION .
+   66 MULTIPLYEXPRESSION: MULTIPLYEXPRESSION . MUL TERMINALEXPRESSION
+   67                   | MULTIPLYEXPRESSION . DIV TERMINALEXPRESSION
+
+    MUL  shift, and go to state 118
+    DIV  shift, and go to state 119
+
+    $default  reduce using rule 63 (ADDEXPRESSION)
+
+
+State 136
+
+   64 ADDEXPRESSION: ADDEXPRESSION MIS MULTIPLYEXPRESSION .
+   66 MULTIPLYEXPRESSION: MULTIPLYEXPRESSION . MUL TERMINALEXPRESSION
+   67                   | MULTIPLYEXPRESSION . DIV TERMINALEXPRESSION
+
+    MUL  shift, and go to state 118
+    DIV  shift, and go to state 119
+
+    $default  reduce using rule 64 (ADDEXPRESSION)
+
+
+State 137
+
+   66 MULTIPLYEXPRESSION: MULTIPLYEXPRESSION MUL TERMINALEXPRESSION .
+
+    $default  reduce using rule 66 (MULTIPLYEXPRESSION)
+
+
+State 138
+
+   67 MULTIPLYEXPRESSION: MULTIPLYEXPRESSION DIV TERMINALEXPRESSION .
+
+    $default  reduce using rule 67 (MULTIPLYEXPRESSION)
 
 
 State 139
 
-   52 ITERATIONSTATEMENT: chalo LRP integer se integer RRP . COMPOUNDSTATEMENT
+   46 ELSEIFSTATEMENT: agarwarna LRP LOGICALEXPRESSION RRP . COMPOUNDSTATEMENT
 
     LCP  shift, and go to state 6
 
@@ -1451,82 +1445,91 @@ State 139
 
 State 140
 
+   51 ITERATIONSTATEMENT: chalo LRP integer se integer RRP . COMPOUNDSTATEMENT
+
+    LCP  shift, and go to state 6
+
+    COMPOUNDSTATEMENT  go to state 147
+
+
+State 141
+
    12 LOGICALOPERATORS: AND .
 
     $default  reduce using rule 12 (LOGICALOPERATORS)
 
 
-State 141
+State 142
 
    13 LOGICALOPERATORS: OR .
 
     $default  reduce using rule 13 (LOGICALOPERATORS)
 
 
-State 142
-
-   53 LOGICALEXPRESSION: LRP RELATIONALEXPRESSION RRP LOGICALOPERATORS . LRP RELATIONALEXPRESSION RRP
-
-    LRP  shift, and go to state 147
-
-
 State 143
 
-   54 LOGICALEXPRESSION: NOTOPERATOR LRP RELATIONALEXPRESSION RRP .
+   52 LOGICALEXPRESSION: LRP RELATIONALEXPRESSION RRP LOGICALOPERATORS . LRP RELATIONALEXPRESSION RRP
 
-    $default  reduce using rule 54 (LOGICALEXPRESSION)
+    LRP  shift, and go to state 148
 
 
 State 144
 
-   44 PRINTSTATEMENT: likho LRP stringliteral comma identifier RRP . semicolon
+   53 LOGICALEXPRESSION: NOTOPERATOR LRP RELATIONALEXPRESSION RRP .
 
-    semicolon  shift, and go to state 148
+    $default  reduce using rule 53 (LOGICALEXPRESSION)
 
 
 State 145
 
-   47 ELSEIFSTATEMENT: agarwarna LRP LOGICALEXPRESSION RRP COMPOUNDSTATEMENT .
+   42 PRINTSTATEMENT: likho LRP stringliteral comma identifier RRP . semicolon
 
-    $default  reduce using rule 47 (ELSEIFSTATEMENT)
+    semicolon  shift, and go to state 149
 
 
 State 146
 
-   52 ITERATIONSTATEMENT: chalo LRP integer se integer RRP COMPOUNDSTATEMENT .
+   46 ELSEIFSTATEMENT: agarwarna LRP LOGICALEXPRESSION RRP COMPOUNDSTATEMENT .
 
-    $default  reduce using rule 52 (ITERATIONSTATEMENT)
+    $default  reduce using rule 46 (ELSEIFSTATEMENT)
 
 
 State 147
 
-   53 LOGICALEXPRESSION: LRP RELATIONALEXPRESSION RRP LOGICALOPERATORS LRP . RELATIONALEXPRESSION RRP
+   51 ITERATIONSTATEMENT: chalo LRP integer se integer RRP COMPOUNDSTATEMENT .
 
-    sahih       shift, and go to state 63
-    ghalat      shift, and go to state 64
-    identifier  shift, and go to state 70
-    integer     shift, and go to state 71
-
-    BOOLOPTIONS           go to state 75
-    RELATIONALEXPRESSION  go to state 149
+    $default  reduce using rule 51 (ITERATIONSTATEMENT)
 
 
 State 148
 
-   44 PRINTSTATEMENT: likho LRP stringliteral comma identifier RRP semicolon .
+   52 LOGICALEXPRESSION: LRP RELATIONALEXPRESSION RRP LOGICALOPERATORS LRP . RELATIONALEXPRESSION RRP
 
-    $default  reduce using rule 44 (PRINTSTATEMENT)
+    sahih       shift, and go to state 61
+    ghalat      shift, and go to state 62
+    identifier  shift, and go to state 68
+    integer     shift, and go to state 69
+
+    BOOLOPTIONS           go to state 73
+    RELATIONALEXPRESSION  go to state 150
 
 
 State 149
 
-   53 LOGICALEXPRESSION: LRP RELATIONALEXPRESSION RRP LOGICALOPERATORS LRP RELATIONALEXPRESSION . RRP
+   42 PRINTSTATEMENT: likho LRP stringliteral comma identifier RRP semicolon .
 
-    RRP  shift, and go to state 150
+    $default  reduce using rule 42 (PRINTSTATEMENT)
 
 
 State 150
 
-   53 LOGICALEXPRESSION: LRP RELATIONALEXPRESSION RRP LOGICALOPERATORS LRP RELATIONALEXPRESSION RRP .
+   52 LOGICALEXPRESSION: LRP RELATIONALEXPRESSION RRP LOGICALOPERATORS LRP RELATIONALEXPRESSION . RRP
 
-    $default  reduce using rule 53 (LOGICALEXPRESSION)
+    RRP  shift, and go to state 151
+
+
+State 151
+
+   52 LOGICALEXPRESSION: LRP RELATIONALEXPRESSION RRP LOGICALOPERATORS LRP RELATIONALEXPRESSION RRP .
+
+    $default  reduce using rule 52 (LOGICALEXPRESSION)
