@@ -1,5 +1,4 @@
 %{
-int yylex();
 void yyerror (char *s);
 #include <stdio.h>
 #include <stdlib.h>
@@ -61,6 +60,7 @@ MULTISTATEMENT: STATEMENT MULTISTATEMENT
 DECLARATION: NUMBERTYPE identifier semicolon 
 	| STRINGTYPE identifier semicolon 
 	| FLOATTYPE identifier semicolon 
+	| BOOLTYPE identifier semicolon
 	| NUMBERTYPE identifier EA integer semicolon 
 	| STRINGTYPE identifier EA stringliteral semicolon 
 	| FLOATTYPE identifier EA decimal semicolon 
@@ -119,12 +119,26 @@ TERMINALEXPRESSION: NUMBERS
 	| LRP ADDEXPRESSION RRP
 	;
 %%
-
-int main(void){
-	return yyparse();
+#include "lex.yy.c"
+#include <string.h>
+int main(int argc, char *argv[])
+{
+	yyin = fopen(argv[1], "r");
+	if(!yyparse())
+		printf("\nParsed Correctly!\n");
+	else
+		printf("\nParsing Failed\n");
+	fclose(yyin);
+	PrintValueTable();
+	PrintHashTable();
+	return 0;
 }
+/*
+int main(void){
+	PrintValueTable();
+	return yyparse();
+}*/
 
 void yyerror (char *s) {
-	//printf("\nMasla = %s\n", s);	
-	printf("\nLine %d : %s\n", (yylineno), s);
+	printf("\nLine = %d : Masla = %s\n", (yylineno), s);
 }

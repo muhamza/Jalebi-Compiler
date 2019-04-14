@@ -552,8 +552,10 @@ char *yytext;
 #line 1 "compiler.l"
 #line 2 "compiler.l"
 #include "y.tab.h"
-#line 556 "lex.yy.c"
-#line 557 "lex.yy.c"
+#include <string.h>
+char tempDataType[50] = "";
+#line 558 "lex.yy.c"
+#line 559 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -768,9 +770,9 @@ YY_DECL
 		}
 
 	{
-#line 7 "compiler.l"
+#line 9 "compiler.l"
 
-#line 774 "lex.yy.c"
+#line 776 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -839,247 +841,247 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 8 "compiler.l"
+#line 10 "compiler.l"
 return markazi;
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 9 "compiler.l"
+#line 11 "compiler.l"
 return chalo;
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 10 "compiler.l"
+#line 12 "compiler.l"
 return se;
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 11 "compiler.l"
+#line 13 "compiler.l"
 return jabtak;
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 12 "compiler.l"
+#line 14 "compiler.l"
 return agar;
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 13 "compiler.l"
+#line 15 "compiler.l"
 return warna;
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 14 "compiler.l"
+#line 16 "compiler.l"
 return agarwarna;
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 15 "compiler.l"
+#line 17 "compiler.l"
 return likho;
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 16 "compiler.l"
-return hindsa;
+#line 18 "compiler.l"
+{strcpy(tempDataType, "hindsa"); return hindsa;}
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 17 "compiler.l"
-return jumla;
+#line 19 "compiler.l"
+{strcpy(tempDataType, "jumla"); return jumla;}
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 18 "compiler.l"
-return booliyayi;
+#line 20 "compiler.l"
+{strcpy(tempDataType, "booliyayi"); return booliyayi;}
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 19 "compiler.l"
-return aasharia;
+#line 21 "compiler.l"
+{strcpy(tempDataType, "aasharia"); return aasharia;}
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 20 "compiler.l"
-return  khaali;
+#line 22 "compiler.l"
+return khaali;
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 21 "compiler.l"
+#line 23 "compiler.l"
 return sahih;
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 22 "compiler.l"
+#line 24 "compiler.l"
 return ghalat;
 	YY_BREAK
 case 16:
 /* rule 16 can match eol */
 YY_RULE_SETUP
-#line 23 "compiler.l"
-return stringliteral;
+#line 25 "compiler.l"
+{InsertValueTable(yytext, "stringliteral", yylineno); return stringliteral;}
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 24 "compiler.l"
-return identifier;
+#line 26 "compiler.l"
+{InsertHashTable(yytext, tempDataType, yylineno); return identifier;}
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 25 "compiler.l"
-return decimal;
+#line 27 "compiler.l"
+{InsertValueTable(yytext, "decimal", yylineno); return decimal;}
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 26 "compiler.l"
-return integer;
+#line 28 "compiler.l"
+{InsertValueTable(yytext, "integer", yylineno); return integer;}
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 27 "compiler.l"
+#line 29 "compiler.l"
 return EA;
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 28 "compiler.l"
+#line 30 "compiler.l"
 return AA;
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 29 "compiler.l"
+#line 31 "compiler.l"
 return SA;
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 30 "compiler.l"
+#line 32 "compiler.l"
 return MA;
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 31 "compiler.l"
+#line 33 "compiler.l"
 return DA;
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 32 "compiler.l"
+#line 34 "compiler.l"
 return GT;
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 33 "compiler.l"
+#line 35 "compiler.l"
 return LT;
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 34 "compiler.l"
+#line 36 "compiler.l"
 return GTE;
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 35 "compiler.l"
+#line 37 "compiler.l"
 return LTE;
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 36 "compiler.l"
+#line 38 "compiler.l"
 return IEQ;
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 37 "compiler.l"
+#line 39 "compiler.l"
 return NEQ;
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 38 "compiler.l"
+#line 40 "compiler.l"
 return INO;
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 39 "compiler.l"
+#line 41 "compiler.l"
 return DCO;
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 40 "compiler.l"
+#line 42 "compiler.l"
 return PLS;
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 41 "compiler.l"
+#line 43 "compiler.l"
 return MIS;
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 42 "compiler.l"
+#line 44 "compiler.l"
 return MUL;
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 43 "compiler.l"
+#line 45 "compiler.l"
 return DIV;
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 44 "compiler.l"
+#line 46 "compiler.l"
 return MOD;
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 45 "compiler.l"
+#line 47 "compiler.l"
 return AND;
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 46 "compiler.l"
+#line 48 "compiler.l"
 return OR;
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 47 "compiler.l"
+#line 49 "compiler.l"
 return NOT;
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 48 "compiler.l"
+#line 50 "compiler.l"
 return LRP;
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 49 "compiler.l"
+#line 51 "compiler.l"
 return RRP;
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 50 "compiler.l"
+#line 52 "compiler.l"
 return LCP;
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 51 "compiler.l"
+#line 53 "compiler.l"
 return RCP;
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 52 "compiler.l"
+#line 54 "compiler.l"
 return comma;
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 53 "compiler.l"
-return semicolon;
+#line 55 "compiler.l"
+{strcpy(tempDataType, "none"); return semicolon;}
 	YY_BREAK
 case 47:
 /* rule 47 can match eol */
 YY_RULE_SETUP
-#line 54 "compiler.l"
+#line 56 "compiler.l"
 ;
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
-#line 56 "compiler.l"
+#line 58 "compiler.l"
 ECHO;
 	YY_BREAK
-#line 1083 "lex.yy.c"
+#line 1085 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -2055,7 +2057,141 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 56 "compiler.l"
+#line 58 "compiler.l"
+
+
+struct ValueNode
+{
+	char value[50];
+	char datatype[20];
+	int lineno;
+};
+
+struct ValueNode valueTable[100];
+int valueTableCount = 0;
+
+void InsertValueTable(char *value, char *datatype, int lineno)
+{
+	strcpy(valueTable[valueTableCount].value, value);
+	strcpy(valueTable[valueTableCount].datatype, datatype);
+	valueTable[valueTableCount].lineno = lineno;
+	valueTableCount++;
+}
+
+void PrintValueTable()
+{
+	int i;
+	printf("\n\n------------------------------Value TABLE------------------------------\n");
+	printf("--------------------------------------------------------------------------\n");
+	printf("Value \t\t\t|\tData Type\t\t\t|\tLine no.\n");
+	printf("--------------------------------------------------------------------------\n");
+	for(i=0;i<valueTableCount;i++)
+	{
+		printf("%s\t\t\t\t", valueTable[i].value);
+		printf("%s\t\t\t\t", valueTable[i].datatype);
+		printf("%d\t\n", valueTable[i].lineno);
+	}
+	printf("\n\n");
+}
+
+struct HashNode
+{
+	char ident[50];
+    	char datatype[50];
+    	int lineno;
+	struct HashNode *next;
+};
+
+struct Hash
+{
+	struct HashNode *head;
+	int hashCount;
+};
+
+struct Hash hashTable[1000];
+int totalElements = 1000;
+
+struct HashNode * CreateNode(char *ident, char *datatype, int lineno)
+{
+	struct HashNode *node;
+	node = (struct HashNode *) malloc(sizeof(struct HashNode));
+	strcpy(node->ident, ident);
+	strcpy(node->datatype, datatype);
+	node->lineno = lineno; 
+	node->next = NULL;
+	return node;
+}
+
+int CalculateHash(char *ident)
+{
+	int hashValue = 0;
+	for(int i=0; ident[i]!='\0'; i++)
+	{
+		hashValue = hashValue + (int)ident[i];
+	}
+	hashValue = hashValue % totalElements;
+	return hashValue;
+}
+
+void InsertHashTable(char *ident, char *datatype, int lineno)
+{
+	int flag = 0;
+	int hashValue;
+	hashValue = CalculateHash(ident);
+	struct HashNode *node = CreateNode(ident, datatype, lineno);
+	if (hashTable[hashValue].head == NULL)
+	{
+		hashTable[hashValue].head = node;
+	        hashTable[hashValue].hashCount = 1;
+	        return;
+	}
+	struct HashNode *temp;
+    	temp = hashTable[hashValue].head;
+	//traversing the linked list
+	while (temp != NULL)
+    	{
+        	if (strcmp(temp->ident, ident)==0)
+        	{
+            		flag = 1;
+            		break;
+        	}
+        	temp = node->next;
+    	}
+	if(!flag)
+	{
+		node->next = (hashTable[hashValue].head);
+		//updation of head
+		hashTable[hashValue].head = node;
+		hashTable[hashValue].hashCount++;
+	}
+	return;
+}
+
+void PrintHashTable()
+{
+    	struct HashNode *node;
+    	printf("\n-----------------------------------------Symbol Table---------------------------------------------\n");
+    	printf("--------------------------------------------------------------------------------------------------");
+    	printf("\nToken \t\t\t|\t\Token Type \t\t\t|\t\Line no. \n");
+        printf("--------------------------------------------------------------------------------------------------\n");
+    	for (int i = 0; i < totalElements; i++)
+    	{
+        	if (hashTable[i].hashCount == 0)
+            		continue;
+        	node = hashTable[i].head;
+        	if (!node)
+            		continue;
+        	while (node != NULL)
+        	{
+            		printf("%s\t\t\t\t", node->ident);
+            		printf("%s\t\t\t\t", node->datatype);
+			printf("%d\t\n", node->lineno);
+            		node = node->next;
+        	}
+	}
+	printf("--------------------------------------------------------------------------------------------------\n");
+   	return;
+}
 
 
 int yywrap(void){

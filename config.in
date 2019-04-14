@@ -1,11 +1,14 @@
 markazi(){
-	booliyayi test = sahih;
-	hindsa number = 5;
-	agar (number == 5){
-		likho("sahih");	
-		number++;	
+	hindsa num = 5;
+	booliyayi test = ghalat;
+	aasharia dec = 22.14;
+	jumla sen = "testing ke liye jumla";
+	agar(num == 21){
+		likho("sahih hai!");
+		num++;
 	}
 	warna{
-		likho("ghalat");	
+		likho("ghalat hai!");
+		dec = dec + 10.2;
 	}
 }
