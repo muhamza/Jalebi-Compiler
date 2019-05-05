@@ -924,7 +924,7 @@ YY_RULE_SETUP
 {
 		lineVal = yylineno; 
 		if(lineType == lineVal && lineVal == lineVar && lineVal >= 0){
-			InsertStringValue(scopeOut, tempVariable, yytext);
+			InitializeVariable(tempVariable);
 		} 
 		yylval.sVal = strdup(yytext);
 		return stringliteral;
@@ -949,7 +949,7 @@ YY_RULE_SETUP
 {
 		lineVal = yylineno; 
 		if(lineType == lineVal && lineVal == lineVar && lineVal >= 0){
-			InsertFloatValue(scopeOut, tempVariable, atof(yytext));
+			InitializeVariable(tempVariable);
 		}  
 		yylval.fVal = atof(yytext); 
 		return decimal;
@@ -961,7 +961,7 @@ YY_RULE_SETUP
 {
 		lineVal = yylineno; 
 		if(lineType == lineVal && lineVal == lineVar && lineVal >= 0){
-			InsertIntValue(scopeOut, tempVariable, atoi(yytext));
+			InitializeVariable(tempVariable);
 		} 
 		yylval.iVal = atoi(yytext); 
 		return integer;

@@ -9,6 +9,7 @@ int scopeY = -1;
 int tCounter = 0;
 char *tempString;
 bool FindVariableSymbolTable(char *ident);
+bool IsVariableInitialized(char *ident);
 bool IsVariableInteger(char *ident);
 %}
 
@@ -28,9 +29,9 @@ bool IsVariableInteger(char *ident);
 %token <iVal> integer
 %token comma semicolon	
 
-%type <sVal> RELATIONALEXPRESSION LOGICALEXPRESSION BOOLOPTIONS RELATIONALOPERATORS LOGICALOPERATORS NOTOPERATOR
 %type <sVal> ADDEXPRESSION MULTIPLYEXPRESSION TERMINALEXPRESSION
-%type <sVal> IFSTATEMENT
+%type <sVal> RELATIONALEXPRESSION LOGICALEXPRESSION BOOLOPTIONS RELATIONALOPERATORS LOGICALOPERATORS NOTOPERATOR
+%type <sVal> SELECTIONSTATEMENT IFSTATEMENT ELSEIFSTATEMENT ELSESTATEMENT
 
 %start START
 %left LRP RRP LCP RCP
@@ -80,14 +81,14 @@ DECLARATION: NUMBERTYPE identifier semicolon
 	| STRINGTYPE identifier semicolon 
 	| FLOATTYPE identifier semicolon 
 	| BOOLTYPE identifier semicolon
-	| NUMBERTYPE identifier EA integer semicolon {/*printf("identifier = %s\n", $2);*/}
-	| STRINGTYPE identifier EA stringliteral semicolon 
-	| FLOATTYPE identifier EA decimal semicolon 
-	| BOOLTYPE identifier EA BOOLOPTIONS semicolon
+	| NUMBERTYPE identifier EA integer semicolon {printf("%s = %d\n", $2, $4);}
+	| STRINGTYPE identifier EA stringliteral semicolon {printf("%s = %s\n", $2, $4);}
+	| FLOATTYPE identifier EA decimal semicolon {printf("%s = %f\n", $2, $4);}
+	| BOOLTYPE identifier EA BOOLOPTIONS semicolon {printf("%s = %s\n", $2, $4);}
 	; 
-STATEMENT: EXPRESSIONSTATEMENT
-	| SELECTIONSTATEMENT
+STATEMENT: SELECTIONSTATEMENT
 	| ITERATIONSTATEMENT
+	| EXPRESSIONSTATEMENT
 	| PRINTSTATEMENT
 	;
 PRINTSTATEMENT: likho LRP stringliteral RRP semicolon	{printf("print %s\n", $3);}
@@ -120,11 +121,19 @@ IFSTATEMENT: agar LRP LOGICALEXPRESSION RRP COMPOUNDSTATEMENT {
 		    	$$ = strdup(temp);
 		}	
 	;
-ELSEIFSTATEMENT: agarwarna LRP LOGICALEXPRESSION RRP COMPOUNDSTATEMENT 	
-	| 
+ELSEIFSTATEMENT: agarwarna LRP LOGICALEXPRESSION RRP COMPOUNDSTATEMENT 	{
+			char temp[5];
+		    	sprintf(temp,"t%d",tCounter++);
+			printf("if %s goto st+3\n", $3);
+			printf("%s = %s\n",temp, "0");
+			printf("goto st+2\n");
+			printf("%s = %s\n",temp, "1");
+		    	$$ = strdup(temp);
+		}
+	| {}
 	;
-ELSESTATEMENT: warna COMPOUNDSTATEMENT 
-	| 
+ELSESTATEMENT: warna COMPOUNDSTATEMENT {}
+	| {}
 	;
 ITERATIONSTATEMENT: jabtak LRP LOGICALEXPRESSION RRP COMPOUNDSTATEMENT
         | chalo LRP integer se integer RRP COMPOUNDSTATEMENT
@@ -223,6 +232,7 @@ EXPRESSIONSTATEMENT: identifier ASSIGNMENTOPERATORS identifier semicolon
 				yyerror("Incompatible datatypes!");
 				exit(1);
 			}
+			InitializeVariable($1);
 			//UpdateVariableValue($1, atoi($3)); 
 			//printf("Total = %d\n", $3);
 			printf("%s = %s\n", $1, $3);
@@ -268,11 +278,12 @@ TERMINALEXPRESSION: integer {
 		}
 	| identifier {
 			int ret = FindVariableSymbolTable($1); 
-			if(ret){
+			int ret2 = IsVariableInitialized($1);
+			if(ret && ret2){
 				$$ = $1;
 			}
 			else{
-				yyerror("Variable not declared!");
+				yyerror("Variable not declared or initialized!");
 				exit(1);
 			}
 		}

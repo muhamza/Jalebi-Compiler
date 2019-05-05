@@ -74,9 +74,10 @@ int scopeY = -1;
 int tCounter = 0;
 char *tempString;
 bool FindVariableSymbolTable(char *ident);
+bool IsVariableInitialized(char *ident);
 bool IsVariableInteger(char *ident);
 
-#line 80 "y.tab.c" /* yacc.c:339  */
+#line 81 "y.tab.c" /* yacc.c:339  */
 
 # ifndef YY_NULLPTR
 #  if defined __cplusplus && 201103L <= __cplusplus
@@ -209,13 +210,13 @@ extern int yydebug;
 
 union YYSTYPE
 {
-#line 15 "compiler.y" /* yacc.c:355  */
+#line 16 "compiler.y" /* yacc.c:355  */
 
 	int iVal;
 	float fVal;
 	char* sVal;
 
-#line 219 "y.tab.c" /* yacc.c:355  */
+#line 220 "y.tab.c" /* yacc.c:355  */
 };
 
 typedef union YYSTYPE YYSTYPE;
@@ -232,7 +233,7 @@ int yyparse (void);
 
 /* Copy the second part of user declarations.  */
 
-#line 236 "y.tab.c" /* yacc.c:358  */
+#line 237 "y.tab.c" /* yacc.c:358  */
 
 #ifdef short
 # undef short
@@ -534,14 +535,14 @@ static const yytype_uint8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint16 yyrline[] =
 {
-       0,    44,    44,    47,    47,    47,    47,    50,    50,    50,
-      50,    50,    50,    52,    52,    54,    57,    57,    59,    61,
-      61,    63,    65,    67,    69,    69,    71,    73,    74,    76,
-      77,    79,    80,    81,    82,    83,    84,    85,    86,    88,
-      89,    90,    91,    93,    94,   102,   111,   113,   123,   124,
-     126,   127,   129,   130,   132,   138,   144,   146,   164,   190,
-     200,   211,   212,   213,   214,   215,   231,   237,   243,   245,
-     251,   257,   259,   264,   269,   279
+       0,    45,    45,    48,    48,    48,    48,    51,    51,    51,
+      51,    51,    51,    53,    53,    55,    58,    58,    60,    62,
+      62,    64,    66,    68,    70,    70,    72,    74,    75,    77,
+      78,    80,    81,    82,    83,    84,    85,    86,    87,    89,
+      90,    91,    92,    94,    95,   103,   112,   114,   124,   133,
+     135,   136,   138,   139,   141,   147,   153,   155,   173,   199,
+     209,   220,   221,   222,   223,   224,   241,   247,   253,   255,
+     261,   267,   269,   274,   279,   290
 };
 #endif
 
@@ -620,7 +621,7 @@ static const yytype_uint8 yydefact[] =
        0,     0,     0,     0,     1,     0,    28,     2,    22,    23,
       18,    21,     0,     0,     0,     0,    30,    28,     0,     0,
        0,     0,     0,     0,     0,     0,     0,    16,    17,     0,
-       0,    30,    42,    40,    49,    41,    39,    27,    34,     0,
+       0,    30,    42,    39,    49,    40,    41,    27,    34,     0,
       33,     0,    31,     0,    32,     0,     0,     0,     0,     0,
        0,     5,     6,     3,     4,     0,     0,     0,    26,    29,
        0,    51,    19,    20,     0,     0,     0,     0,     0,     0,
@@ -1412,25 +1413,43 @@ yyreduce:
   switch (yyn)
     {
         case 26:
-#line 71 "compiler.y" /* yacc.c:1646  */
+#line 72 "compiler.y" /* yacc.c:1646  */
     {/*printf("Increment Scope = %d\n", ++scopeY);*/}
-#line 1418 "y.tab.c" /* yacc.c:1646  */
+#line 1419 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 35:
-#line 83 "compiler.y" /* yacc.c:1646  */
-    {/*printf("identifier = %s\n", $2);*/}
-#line 1424 "y.tab.c" /* yacc.c:1646  */
+#line 84 "compiler.y" /* yacc.c:1646  */
+    {printf("%s = %d\n", (yyvsp[-3].sVal), (yyvsp[-1].iVal));}
+#line 1425 "y.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 36:
+#line 85 "compiler.y" /* yacc.c:1646  */
+    {printf("%s = %s\n", (yyvsp[-3].sVal), (yyvsp[-1].sVal));}
+#line 1431 "y.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 37:
+#line 86 "compiler.y" /* yacc.c:1646  */
+    {printf("%s = %f\n", (yyvsp[-3].sVal), (yyvsp[-1].fVal));}
+#line 1437 "y.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 38:
+#line 87 "compiler.y" /* yacc.c:1646  */
+    {printf("%s = %s\n", (yyvsp[-3].sVal), (yyvsp[-1].sVal));}
+#line 1443 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 43:
-#line 93 "compiler.y" /* yacc.c:1646  */
+#line 94 "compiler.y" /* yacc.c:1646  */
     {printf("print %s\n", (yyvsp[-2].sVal));}
-#line 1430 "y.tab.c" /* yacc.c:1646  */
+#line 1449 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 44:
-#line 94 "compiler.y" /* yacc.c:1646  */
+#line 95 "compiler.y" /* yacc.c:1646  */
     {
 			int ret = FindVariableSymbolTable((yyvsp[-2].sVal)); 
 			if(!ret){
@@ -1439,11 +1458,11 @@ yyreduce:
 			}
 			printf("print %s, %s\n", (yyvsp[-4].sVal), (yyvsp[-2].sVal));
 		}
-#line 1443 "y.tab.c" /* yacc.c:1646  */
+#line 1462 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 45:
-#line 102 "compiler.y" /* yacc.c:1646  */
+#line 103 "compiler.y" /* yacc.c:1646  */
     {	
 			int ret = FindVariableSymbolTable((yyvsp[-2].sVal)); 
 			if(!ret){
@@ -1452,11 +1471,11 @@ yyreduce:
 			}	
 			printf("print %s\n", (yyvsp[-2].sVal));
 		}
-#line 1456 "y.tab.c" /* yacc.c:1646  */
+#line 1475 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 47:
-#line 113 "compiler.y" /* yacc.c:1646  */
+#line 114 "compiler.y" /* yacc.c:1646  */
     {
 			char temp[5];
 		    	sprintf(temp,"t%d",tCounter++);
@@ -1466,39 +1485,71 @@ yyreduce:
 			printf("%s = %s\n",temp, "1");
 		    	(yyval.sVal) = strdup(temp);
 		}
-#line 1470 "y.tab.c" /* yacc.c:1646  */
+#line 1489 "y.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 48:
+#line 124 "compiler.y" /* yacc.c:1646  */
+    {
+			char temp[5];
+		    	sprintf(temp,"t%d",tCounter++);
+			printf("if %s goto true\n", (yyvsp[-2].sVal));
+			printf("%s = %s\n",temp, "0");
+			printf("goto else\n");
+			printf("%s = %s\n",temp, "1");
+		    	(yyval.sVal) = strdup(temp);
+		}
+#line 1503 "y.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 49:
+#line 133 "compiler.y" /* yacc.c:1646  */
+    {}
+#line 1509 "y.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 50:
+#line 135 "compiler.y" /* yacc.c:1646  */
+    {}
+#line 1515 "y.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 51:
+#line 136 "compiler.y" /* yacc.c:1646  */
+    {}
+#line 1521 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 54:
-#line 132 "compiler.y" /* yacc.c:1646  */
+#line 141 "compiler.y" /* yacc.c:1646  */
     {
 			char temp[5];
 		    	sprintf(temp,"t%d",tCounter++);
 			printf("%s = %s %s %s\n", temp, (yyvsp[-5].sVal), (yyvsp[-3].sVal), (yyvsp[-1].sVal));
 		    	(yyval.sVal) = strdup(temp);
 		}
-#line 1481 "y.tab.c" /* yacc.c:1646  */
+#line 1532 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 55:
-#line 138 "compiler.y" /* yacc.c:1646  */
+#line 147 "compiler.y" /* yacc.c:1646  */
     {	//RELATIONALEXPRESSION
 			char temp[5];
 		    	sprintf(temp,"t%d",tCounter++);
 			printf("%s = %s %s\n", temp, (yyvsp[-3].sVal), (yyvsp[-1].sVal));
 		    	(yyval.sVal) = strdup(temp);
 		}
-#line 1492 "y.tab.c" /* yacc.c:1646  */
+#line 1543 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 56:
-#line 144 "compiler.y" /* yacc.c:1646  */
+#line 153 "compiler.y" /* yacc.c:1646  */
     { (yyval.sVal) = (yyvsp[0].sVal); }
-#line 1498 "y.tab.c" /* yacc.c:1646  */
+#line 1549 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 57:
-#line 146 "compiler.y" /* yacc.c:1646  */
+#line 155 "compiler.y" /* yacc.c:1646  */
     {
 			bool ret1 = FindVariableSymbolTable((yyvsp[-2].sVal)); 
 			if (!ret1){
@@ -1517,11 +1568,11 @@ yyreduce:
 			printf("%s = %s %s %s\n",temp, (yyvsp[-2].sVal), (yyvsp[-1].sVal) ,num);
 		    	(yyval.sVal) = strdup(temp);
 		}
-#line 1521 "y.tab.c" /* yacc.c:1646  */
+#line 1572 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 58:
-#line 164 "compiler.y" /* yacc.c:1646  */
+#line 173 "compiler.y" /* yacc.c:1646  */
     {
 			bool ret1 = FindVariableSymbolTable((yyvsp[-2].sVal)); 
 			if (!ret1){
@@ -1548,11 +1599,11 @@ yyreduce:
 			printf("%s = %s %s %s\n",temp, (yyvsp[-2].sVal), (yyvsp[-1].sVal), (yyvsp[0].sVal));
 		    	(yyval.sVal) = strdup(temp);
 		}
-#line 1552 "y.tab.c" /* yacc.c:1646  */
+#line 1603 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 59:
-#line 190 "compiler.y" /* yacc.c:1646  */
+#line 199 "compiler.y" /* yacc.c:1646  */
     {
 			char* num[5]; 
 			sprintf(num, "%d\0", (yyvsp[-2].iVal));
@@ -1563,22 +1614,22 @@ yyreduce:
 			printf("%s = %s %s %s\n",temp, num, (yyvsp[-1].sVal), num2);
 		    	(yyval.sVal) = strdup(temp);
 		}
-#line 1567 "y.tab.c" /* yacc.c:1646  */
+#line 1618 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 60:
-#line 200 "compiler.y" /* yacc.c:1646  */
+#line 209 "compiler.y" /* yacc.c:1646  */
     {
 			char temp[5];
 			sprintf(temp,"t%d",tCounter++);
 			printf("%s = %s\n",temp, (yyvsp[0].sVal));
 			(yyval.sVal) = strdup(temp);
 		}
-#line 1578 "y.tab.c" /* yacc.c:1646  */
+#line 1629 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 65:
-#line 215 "compiler.y" /* yacc.c:1646  */
+#line 224 "compiler.y" /* yacc.c:1646  */
     {
 			bool ret1 = FindVariableSymbolTable((yyvsp[-3].sVal)); 
 			if (!ret1){
@@ -1590,112 +1641,114 @@ yyreduce:
 				yyerror("Incompatible datatypes!");
 				exit(1);
 			}
+			InitializeVariable((yyvsp[-3].sVal));
 			//UpdateVariableValue($1, atoi($3)); 
 			//printf("Total = %d\n", $3);
 			printf("%s = %s\n", (yyvsp[-3].sVal), (yyvsp[-1].sVal));
 		}
-#line 1598 "y.tab.c" /* yacc.c:1646  */
+#line 1650 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 66:
-#line 231 "compiler.y" /* yacc.c:1646  */
+#line 241 "compiler.y" /* yacc.c:1646  */
     {
 		    	char temp[5];
 		    	sprintf(temp,"t%d",tCounter++);
 			printf("%s = %s + %s\n",temp, (yyvsp[-2].sVal), (yyvsp[0].sVal));
 		    	(yyval.sVal) = strdup(temp);
 		}
-#line 1609 "y.tab.c" /* yacc.c:1646  */
+#line 1661 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 67:
-#line 237 "compiler.y" /* yacc.c:1646  */
+#line 247 "compiler.y" /* yacc.c:1646  */
     {
 		    	char temp[5];
 		    	sprintf(temp,"t%d",tCounter++);
 			printf("%s = %s - %s\n",temp, (yyvsp[-2].sVal), (yyvsp[0].sVal));
 		    	(yyval.sVal) = strdup(temp);
 		}
-#line 1620 "y.tab.c" /* yacc.c:1646  */
+#line 1672 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 68:
-#line 243 "compiler.y" /* yacc.c:1646  */
+#line 253 "compiler.y" /* yacc.c:1646  */
     {(yyval.sVal) = (yyvsp[0].sVal);}
-#line 1626 "y.tab.c" /* yacc.c:1646  */
+#line 1678 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 69:
-#line 245 "compiler.y" /* yacc.c:1646  */
+#line 255 "compiler.y" /* yacc.c:1646  */
     {
 		    	char temp[5];
 		    	sprintf(temp,"t%d",tCounter++);
 			printf("%s = %s * %s\n",temp, (yyvsp[-2].sVal), (yyvsp[0].sVal));
 		    	(yyval.sVal) = strdup(temp);
 		}
-#line 1637 "y.tab.c" /* yacc.c:1646  */
+#line 1689 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 70:
-#line 251 "compiler.y" /* yacc.c:1646  */
+#line 261 "compiler.y" /* yacc.c:1646  */
     {
 		    	char temp[5];
 		    	sprintf(temp,"t%d",tCounter++);
 			printf("%s = %s / %s\n",temp, (yyvsp[-2].sVal), (yyvsp[0].sVal));
 		    	(yyval.sVal) = strdup(temp);
 		}
-#line 1648 "y.tab.c" /* yacc.c:1646  */
+#line 1700 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 71:
-#line 257 "compiler.y" /* yacc.c:1646  */
+#line 267 "compiler.y" /* yacc.c:1646  */
     {(yyval.sVal) = (yyvsp[0].sVal);}
-#line 1654 "y.tab.c" /* yacc.c:1646  */
+#line 1706 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 72:
-#line 259 "compiler.y" /* yacc.c:1646  */
+#line 269 "compiler.y" /* yacc.c:1646  */
     {
 			char* temp[5]; 
 			sprintf(temp, "%d\0", (yyvsp[0].iVal));
 			(yyval.sVal) = strdup(temp);
 		}
-#line 1664 "y.tab.c" /* yacc.c:1646  */
+#line 1716 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 73:
-#line 264 "compiler.y" /* yacc.c:1646  */
+#line 274 "compiler.y" /* yacc.c:1646  */
     {
 			char* temp[5]; 
 			sprintf(temp, "%f\0", (yyvsp[0].fVal));
 			(yyval.sVal) = strdup(temp);
 		}
-#line 1674 "y.tab.c" /* yacc.c:1646  */
+#line 1726 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 74:
-#line 269 "compiler.y" /* yacc.c:1646  */
+#line 279 "compiler.y" /* yacc.c:1646  */
     {
 			int ret = FindVariableSymbolTable((yyvsp[0].sVal)); 
-			if(ret){
+			int ret2 = IsVariableInitialized((yyvsp[0].sVal));
+			if(ret && ret2){
 				(yyval.sVal) = (yyvsp[0].sVal);
 			}
 			else{
-				yyerror("Variable not declared!");
+				yyerror("Variable not declared or initialized!");
 				exit(1);
 			}
 		}
-#line 1689 "y.tab.c" /* yacc.c:1646  */
+#line 1742 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 75:
-#line 279 "compiler.y" /* yacc.c:1646  */
+#line 290 "compiler.y" /* yacc.c:1646  */
     {(yyval.sVal) = ((yyvsp[-1].sVal));}
-#line 1695 "y.tab.c" /* yacc.c:1646  */
+#line 1748 "y.tab.c" /* yacc.c:1646  */
     break;
 
 
-#line 1699 "y.tab.c" /* yacc.c:1646  */
+#line 1752 "y.tab.c" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -1923,7 +1976,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 281 "compiler.y" /* yacc.c:1906  */
+#line 292 "compiler.y" /* yacc.c:1906  */
 
 #include "lex.yy.c"
 #include <string.h>

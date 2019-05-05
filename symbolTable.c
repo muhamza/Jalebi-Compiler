@@ -11,12 +11,7 @@ struct SymbolNode
     	char datatype[50];
     	int lineno;
 	int scope;
-	union{
-		int iVal;
-		float fVal;
-		char * sVal;
-	};
-	int flag;
+	int initialized;
 	struct SymbolNode *next;
 };
 
@@ -38,8 +33,8 @@ struct SymbolNode * CreateNode(char *ident, char *datatype, int lineno, int scop
 	strcpy(node->datatype, datatype);
 	node->lineno = lineno; 
 	node->scope = scope;
+	node->initialized = 0;
 	node->next = NULL;
-	//printf("Node Created with %s %s, %d, %d\n", datatype, ident, lineno, scope);
 	return node;
 }
 
@@ -65,33 +60,6 @@ void InsertSymbolTable(char *ident, char *datatype, int lineno, int scope){
 	return;
 }
 
-void FindSymbolTable(char *ident, int scope){
-	int symbolValue = scope, found = 0;
-	if (symbolValue < 0){
-		return;
-	}
-	if (symbolTable[symbolValue].head == NULL){
-		return;
-	}
-	struct SymbolNode *temp;
-    	temp = symbolTable[symbolValue].head;
-
-	while (temp != NULL){
-		if (strcmp(temp->ident, ident)==0){
-			found = 1;
-		    	break;
-		}
-		temp = temp->next;
-	}
-	if (found == 1){
-		//return true;
-		printf("Found = %d\n", 1);
-	}
-	else{
-		//return false;
-		printf("Found = %d\n", 0);
-	}
-}
 
 bool FindVariableSymbolTable(char *ident){
 	struct SymbolNode *temp;
@@ -103,6 +71,24 @@ bool FindVariableSymbolTable(char *ident){
             		continue;
         	while (temp != NULL){
 			if (strcmp(temp->ident, ident)==0){
+				return true;
+			}
+            		temp = temp->next;
+        	}
+	}
+	return false;
+}
+
+bool IsVariableInitialized(char *ident){
+	struct SymbolNode *temp;
+	for (int i = 0; i <= count; i++){	
+        	if (symbolTable[i].symbolCount == 0)
+            		continue;
+        	temp = symbolTable[i].head;
+        	if (!temp)
+            		continue;
+        	while (temp != NULL){
+			if (strcmp(temp->ident, ident)==0 && temp->initialized==1){
 				return true;
 			}
             		temp = temp->next;
@@ -127,6 +113,24 @@ bool IsVariableInteger(char *ident){
         	}
 	}
 	return false;
+}
+
+void InitializeVariable(char* token){
+	struct SymbolNode *temp;
+	for (int i = 0; i <= count; i++){	
+        	if (symbolTable[i].symbolCount == 0)
+            		continue;
+        	temp = symbolTable[i].head;
+        	if (!temp)
+            		continue;
+        	while (temp != NULL){
+			if (strcmp(temp->ident, token)==0){
+				temp->initialized = 1;
+				return;
+			}
+            		temp = temp->next;
+        	}
+	}
 }
 
 void RemoveSymbolTable(char *ident, int scope){
@@ -166,7 +170,7 @@ void PrintSymbolTable()
     	struct SymbolNode *temp;
     	printf("\n-----------------------------------------Symbol Table------------------------------------------------------------------------------------------\n");
     	printf("-----------------------------------------------------------------------------------------------------------------------------------------------");
-    	printf("\n|\tP.Scope \t|\tToken \t|\tToken Type \t|\tLine no. \t|\tScope \t|\tValue \n");
+    	printf("\n|\tP.Scope \t|\tToken \t|\tToken Type \t|\tLine no. \t|\tScope \t|\tInitialized? \n");
         printf("-----------------------------------------------------------------------------------------------------------------------------------------------\n");
 	for (int i = 0; i <= count; i++){	
         	if (symbolTable[i].symbolCount == 0)
@@ -180,15 +184,7 @@ void PrintSymbolTable()
             		printf("\t%s\t", temp->datatype);
 			printf("\t%d\t", temp->lineno);
 			printf("\t%d\t", temp->scope);
-			if(temp->flag == 0){
-				printf("\t%d\n", temp->iVal);
-			}
-			else if(temp->flag == 1){
-				printf("\t%f\n", temp->fVal);
-			}
-			else if(temp->flag == 2){
-				printf("\t%s\n", temp->sVal);
-			}
+			printf("\t%d\n", temp->initialized);
             		temp = temp->next;
         	}
 	}
@@ -221,9 +217,7 @@ void AddScopeList(){
 
 void PushStack(int scope){
 	stack[stackPointer] = scope;
-	//printf("Stack value %d\n", stack[stackPointer]);
 	stackPointer = stackPointer + 1;
-	//PrintStack();
 }
 
 int PopStack(){
@@ -241,7 +235,6 @@ int HeadStack(){
 }
 
 int SecondStack(){
-	//printf("second stack = %d\n", stack[stackPointer-2]);
 	return stack[stackPointer-2];
 }
 
@@ -252,85 +245,5 @@ void PrintStack(){
 	printf("\n");
 }
 
-void InsertIntValue(int scope, char* token, int value){
-	struct SymbolNode *temp;
-        if (symbolTable[scope].symbolCount == 0)
-		return;
-        temp = symbolTable[scope].head;
-        while (temp != NULL){
-		if (strcmp(temp->ident, token)==0){
-			temp->iVal = value;
-			temp->flag = 0;
-			return;
-		}
-            	temp = temp->next;
-        }
-}
-
-void InsertFloatValue(int scope, char* token, float value){
-	struct SymbolNode *temp;
-        if (symbolTable[scope].symbolCount == 0)
-		return;
-        temp = symbolTable[scope].head;
-        while (temp != NULL){
-		if (strcmp(temp->ident, token)==0){
-			temp->fVal = value;
-			temp->flag = 1;
-			return;
-		}
-            	temp = temp->next;
-        }
-}
-
-void InsertStringValue(int scope, char* token, char* value){
-	struct SymbolNode *temp;
-        if (symbolTable[scope].symbolCount == 0)
-		return;
-        temp = symbolTable[scope].head;
-        while (temp != NULL){
-		if (strcmp(temp->ident, token)==0){
-			temp->sVal = strdup(value);
-			temp->flag = 2;
-			return;
-		}
-            	temp = temp->next;
-        }
-}
-
-int GetVariableValue(char* ident){
-	struct SymbolNode *temp;
-	for (int i = 0; i <= count; i++){	
-        	if (symbolTable[i].symbolCount == 0)
-            		continue;
-        	temp = symbolTable[i].head;
-        	if (!temp)
-            		continue;
-        	while (temp != NULL){
-			if (strcmp(temp->ident, ident)==0){
-				return temp->iVal;	
-			}
-            		temp = temp->next;
-        	}
-	}
-	return 0;
-}
-
-void UpdateVariableValue(char* ident, int value){
-	struct SymbolNode *temp;
-	for (int i = 0; i <= count; i++){	
-        	if (symbolTable[i].symbolCount == 0)
-            		continue;
-        	temp = symbolTable[i].head;
-        	if (!temp)
-            		continue;
-        	while (temp != NULL){
-			if (strcmp(temp->ident, ident)==0){
-				temp->iVal = value;
-				return;	
-			}
-            		temp = temp->next;
-        	}
-	}
-}
 
 
