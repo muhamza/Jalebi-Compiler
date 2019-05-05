@@ -1,0 +1,10 @@
+markazi(){
+	hindsa a = 5;
+	hindsa b = 5;
+	agar((a <= b) && (b > 7)){
+		a = 7;
+		b = 8;
+	}
+	b = 6;
+	a = b;
+}
