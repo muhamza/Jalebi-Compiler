@@ -181,12 +181,12 @@ RELATIONALEXPRESSION: identifier RELATIONALOPERATORS integer {
 				yyerror("Incompatible datatypes!");
 				exit(1);
 			}
-			bool ret3 = FindVariableSymbolTable($1); 
+			bool ret3 = FindVariableSymbolTable($3); 
 			if (!ret3){
 				yyerror("Variable not declared!");
 				exit(1);
 			}
-			bool ret4 = IsVariableInteger($1);			
+			bool ret4 = IsVariableInteger($3);			
 			if (!ret4){
 				yyerror("Incompatible datatypes!");
 				exit(1);
