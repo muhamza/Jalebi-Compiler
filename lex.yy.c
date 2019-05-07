@@ -910,17 +910,31 @@ return khaali;
 case 14:
 YY_RULE_SETUP
 #line 28 "compiler.l"
-{yylval.sVal = strdup(yytext); return sahih;}
+{
+		lineVal = yylineno; 
+		if(lineType == lineVal && lineVal == lineVar && lineVal >= 0){
+			InitializeVariable(tempVariable);
+		}
+		yylval.sVal = strdup(yytext); 
+		return sahih;
+	}
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 29 "compiler.l"
-{yylval.sVal = strdup(yytext); return ghalat;}
+#line 36 "compiler.l"
+{
+		lineVal = yylineno; 
+		if(lineType == lineVal && lineVal == lineVar && lineVal >= 0){
+			InitializeVariable(tempVariable);
+		}		
+		yylval.sVal = strdup(yytext); 
+		return ghalat;
+	}
 	YY_BREAK
 case 16:
 /* rule 16 can match eol */
 YY_RULE_SETUP
-#line 30 "compiler.l"
+#line 44 "compiler.l"
 {
 		lineVal = yylineno; 
 		if(lineType == lineVal && lineVal == lineVar && lineVal >= 0){
@@ -932,7 +946,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 38 "compiler.l"
+#line 52 "compiler.l"
 {
 		if(strcmp(tempDataType, "none") != 0){
 			strcpy(tempVariable, yytext); 
@@ -945,7 +959,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 47 "compiler.l"
+#line 61 "compiler.l"
 {
 		lineVal = yylineno; 
 		if(lineType == lineVal && lineVal == lineVar && lineVal >= 0){
@@ -957,7 +971,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 55 "compiler.l"
+#line 69 "compiler.l"
 {
 		lineVal = yylineno; 
 		if(lineType == lineVal && lineVal == lineVar && lineVal >= 0){
@@ -969,122 +983,122 @@ YY_RULE_SETUP
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 63 "compiler.l"
+#line 77 "compiler.l"
 return EA;
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 64 "compiler.l"
+#line 78 "compiler.l"
 return AA;
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 65 "compiler.l"
+#line 79 "compiler.l"
 return SA;
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 66 "compiler.l"
+#line 80 "compiler.l"
 return MA;
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 67 "compiler.l"
+#line 81 "compiler.l"
 return DA;
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 68 "compiler.l"
+#line 82 "compiler.l"
 {yylval.sVal = strdup(yytext); return GT;}
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 69 "compiler.l"
+#line 83 "compiler.l"
 {yylval.sVal = strdup(yytext); return LT;}
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 70 "compiler.l"
+#line 84 "compiler.l"
 {yylval.sVal = strdup(yytext); return GTE;}
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 71 "compiler.l"
+#line 85 "compiler.l"
 {yylval.sVal = strdup(yytext); return LTE;}
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 72 "compiler.l"
+#line 86 "compiler.l"
 {yylval.sVal = strdup(yytext); return IEQ;}
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 73 "compiler.l"
+#line 87 "compiler.l"
 {yylval.sVal = strdup(yytext); return NEQ;}
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 74 "compiler.l"
+#line 88 "compiler.l"
 return INO;
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 75 "compiler.l"
+#line 89 "compiler.l"
 return DCO;
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 76 "compiler.l"
+#line 90 "compiler.l"
 return PLS;
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 77 "compiler.l"
+#line 91 "compiler.l"
 return MIS;
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 78 "compiler.l"
+#line 92 "compiler.l"
 return MUL;
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 79 "compiler.l"
+#line 93 "compiler.l"
 return DIV;
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 80 "compiler.l"
+#line 94 "compiler.l"
 return MOD;
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 81 "compiler.l"
+#line 95 "compiler.l"
 {yylval.sVal = strdup(yytext); return AND;}
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 82 "compiler.l"
+#line 96 "compiler.l"
 {yylval.sVal = strdup(yytext); return OR;}
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 83 "compiler.l"
+#line 97 "compiler.l"
 {yylval.sVal = strdup(yytext); return NOT;}
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 84 "compiler.l"
+#line 98 "compiler.l"
 return LRP;
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 85 "compiler.l"
+#line 99 "compiler.l"
 return RRP;
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 86 "compiler.l"
+#line 100 "compiler.l"
 {
 		scopeOut = count++; 
 		PushStack(scopeOut); 
@@ -1095,7 +1109,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 93 "compiler.l"
+#line 107 "compiler.l"
 {
 		CloseScope(HeadStack()); 
 		scopeOut = PopStack(); 
@@ -1104,12 +1118,12 @@ YY_RULE_SETUP
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 98 "compiler.l"
+#line 112 "compiler.l"
 return comma;
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 99 "compiler.l"
+#line 113 "compiler.l"
 {
 		strcpy(tempDataType, "none"); 
 		return semicolon;
@@ -1118,15 +1132,15 @@ YY_RULE_SETUP
 case 47:
 /* rule 47 can match eol */
 YY_RULE_SETUP
-#line 103 "compiler.l"
+#line 117 "compiler.l"
 ;
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
-#line 104 "compiler.l"
+#line 118 "compiler.l"
 ECHO;
 	YY_BREAK
-#line 1130 "lex.yy.c"
+#line 1144 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -2102,7 +2116,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 104 "compiler.l"
+#line 118 "compiler.l"
 
 
 int yywrap(void){

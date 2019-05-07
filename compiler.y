@@ -93,7 +93,7 @@ STATEMENT: SELECTIONSTATEMENT
 	;
 PRINTSTATEMENT: likho LRP stringliteral RRP semicolon	{printf("print %s\n", $3);}
 	| likho LRP stringliteral comma identifier RRP semicolon {
-			int ret = FindVariableSymbolTable($5); 
+			bool ret = FindVariableSymbolTable($5); 
 			if(!ret){
 				yyerror("Variable not declared!");
 				exit(1);
@@ -101,7 +101,7 @@ PRINTSTATEMENT: likho LRP stringliteral RRP semicolon	{printf("print %s\n", $3);
 			printf("print %s, %s\n", $3, $5);
 		}
 	| likho LRP identifier RRP semicolon {	
-			int ret = FindVariableSymbolTable($3); 
+			bool ret = FindVariableSymbolTable($3); 
 			if(!ret){
 				yyerror("Variable not declared!");
 				exit(1);
@@ -277,13 +277,22 @@ TERMINALEXPRESSION: integer {
 			$$ = strdup(temp);
 		}
 	| identifier {
-			int ret = FindVariableSymbolTable($1); 
-			int ret2 = IsVariableInitialized($1);
-			if(ret && ret2){
+			bool ret1 = FindVariableSymbolTable($1); 
+			bool ret2 = IsVariableInitialized($1);
+			bool ret3 = IsVariableInteger($1);	
+			if(ret1 == true && ret2 == true && ret3 == true){
 				$$ = $1;
 			}
 			else{
-				yyerror("Variable not declared or initialized!");
+				if(!ret1){
+					yyerror("Variable not declared!");
+				}
+				else if(!ret2){
+					yyerror("Variable not initialized!");
+				}
+				else if(!ret3){
+					yyerror("Variable type Mismatch!");
+				}
 				exit(1);
 			}
 		}

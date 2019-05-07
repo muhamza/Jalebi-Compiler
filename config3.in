@@ -1,17 +1,10 @@
 markazi(){
 	hindsa num0 = 5;
 	hindsa num1 = 10;
+	jumla test = "hamza";
+	booliyayi isTrue = sahih;
 	agar(num1 == 21){
 		hindsa num2 = 50;
-		agar(num2 == 50){
-			likho("50 sahih hai!");
-		}
 	}
-	agarwarna(num1 == 22){
-		likho("num1 ghalat hai!");
-	}
-	warna{
-		num1 = num0 + num1;
-		likho("num1 = ",num1);
-	}
+	num0 = 5;
 }

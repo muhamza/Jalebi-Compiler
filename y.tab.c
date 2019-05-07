@@ -542,7 +542,7 @@ static const yytype_uint16 yyrline[] =
       90,    91,    92,    94,    95,   103,   112,   114,   124,   133,
      135,   136,   138,   139,   141,   147,   153,   155,   173,   199,
      209,   220,   221,   222,   223,   224,   241,   247,   253,   255,
-     261,   267,   269,   274,   279,   290
+     261,   267,   269,   274,   279,   299
 };
 #endif
 
@@ -1451,7 +1451,7 @@ yyreduce:
   case 44:
 #line 95 "compiler.y" /* yacc.c:1646  */
     {
-			int ret = FindVariableSymbolTable((yyvsp[-2].sVal)); 
+			bool ret = FindVariableSymbolTable((yyvsp[-2].sVal)); 
 			if(!ret){
 				yyerror("Variable not declared!");
 				exit(1);
@@ -1464,7 +1464,7 @@ yyreduce:
   case 45:
 #line 103 "compiler.y" /* yacc.c:1646  */
     {	
-			int ret = FindVariableSymbolTable((yyvsp[-2].sVal)); 
+			bool ret = FindVariableSymbolTable((yyvsp[-2].sVal)); 
 			if(!ret){
 				yyerror("Variable not declared!");
 				exit(1);
@@ -1493,9 +1493,9 @@ yyreduce:
     {
 			char temp[5];
 		    	sprintf(temp,"t%d",tCounter++);
-			printf("if %s goto true\n", (yyvsp[-2].sVal));
+			printf("if %s goto st+3\n", (yyvsp[-2].sVal));
 			printf("%s = %s\n",temp, "0");
-			printf("goto else\n");
+			printf("goto st+2\n");
 			printf("%s = %s\n",temp, "1");
 		    	(yyval.sVal) = strdup(temp);
 		}
@@ -1584,12 +1584,12 @@ yyreduce:
 				yyerror("Incompatible datatypes!");
 				exit(1);
 			}
-			bool ret3 = FindVariableSymbolTable((yyvsp[-2].sVal)); 
+			bool ret3 = FindVariableSymbolTable((yyvsp[0].sVal)); 
 			if (!ret3){
 				yyerror("Variable not declared!");
 				exit(1);
 			}
-			bool ret4 = IsVariableInteger((yyvsp[-2].sVal));			
+			bool ret4 = IsVariableInteger((yyvsp[0].sVal));			
 			if (!ret4){
 				yyerror("Incompatible datatypes!");
 				exit(1);
@@ -1728,27 +1728,36 @@ yyreduce:
   case 74:
 #line 279 "compiler.y" /* yacc.c:1646  */
     {
-			int ret = FindVariableSymbolTable((yyvsp[0].sVal)); 
-			int ret2 = IsVariableInitialized((yyvsp[0].sVal));
-			if(ret && ret2){
+			bool ret1 = FindVariableSymbolTable((yyvsp[0].sVal)); 
+			bool ret2 = IsVariableInitialized((yyvsp[0].sVal));
+			bool ret3 = IsVariableInteger((yyvsp[0].sVal));	
+			if(ret1 == true && ret2 == true && ret3 == true){
 				(yyval.sVal) = (yyvsp[0].sVal);
 			}
 			else{
-				yyerror("Variable not declared or initialized!");
+				if(!ret1){
+					yyerror("Variable not declared!");
+				}
+				else if(!ret2){
+					yyerror("Variable not initialized!");
+				}
+				else if(!ret3){
+					yyerror("Variable type Mismatch!");
+				}
 				exit(1);
 			}
 		}
-#line 1742 "y.tab.c" /* yacc.c:1646  */
+#line 1751 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 75:
-#line 290 "compiler.y" /* yacc.c:1646  */
+#line 299 "compiler.y" /* yacc.c:1646  */
     {(yyval.sVal) = ((yyvsp[-1].sVal));}
-#line 1748 "y.tab.c" /* yacc.c:1646  */
+#line 1757 "y.tab.c" /* yacc.c:1646  */
     break;
 
 
-#line 1752 "y.tab.c" /* yacc.c:1646  */
+#line 1761 "y.tab.c" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -1976,7 +1985,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 292 "compiler.y" /* yacc.c:1906  */
+#line 301 "compiler.y" /* yacc.c:1906  */
 
 #include "lex.yy.c"
 #include <string.h>

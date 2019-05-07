@@ -25,8 +25,22 @@ jumla {strcpy(tempDataType, "jumla"); lineType = yylineno; return jumla;}
 booliyayi {strcpy(tempDataType, "booliyayi"); lineType = yylineno; return booliyayi;}
 aasharia {strcpy(tempDataType, "aasharia"); lineType = yylineno; return aasharia;}
 khaali return khaali;
-sahih {yylval.sVal = strdup(yytext); return sahih;}
-ghalat {yylval.sVal = strdup(yytext); return ghalat;}
+sahih {
+		lineVal = yylineno; 
+		if(lineType == lineVal && lineVal == lineVar && lineVal >= 0){
+			InitializeVariable(tempVariable);
+		}
+		yylval.sVal = strdup(yytext); 
+		return sahih;
+	}
+ghalat {
+		lineVal = yylineno; 
+		if(lineType == lineVal && lineVal == lineVar && lineVal >= 0){
+			InitializeVariable(tempVariable);
+		}		
+		yylval.sVal = strdup(yytext); 
+		return ghalat;
+	}
 \"(\\.|[^"\\])*\" {
 		lineVal = yylineno; 
 		if(lineType == lineVal && lineVal == lineVar && lineVal >= 0){
